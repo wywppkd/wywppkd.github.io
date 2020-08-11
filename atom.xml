@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Bran&#39;s Blog</title>
+  
+  <subtitle>布兰的网络日志</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://wywppkd.github.io/"/>
+  <updated>2020-08-11T01:17:55.806Z</updated>
+  <id>http://wywppkd.github.io/</id>
+  
+  <author>
+    <name>Bran</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React-Typescript配置ESLint-Prettier</title>
+    <link href="http://wywppkd.github.io/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/"/>
+    <id>http://wywppkd.github.io/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/</id>
+    <published>2020-08-11T01:16:45.000Z</published>
+    <updated>2020-08-11T01:17:55.806Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><pre><code class="bash">$ npx create-react-app app-react-ts --typescript</code></pre><h2 id="安装-ESLint-解析-TypeScript-的依赖"><a href="#安装-ESLint-解析-TypeScript-的依赖" class="headerlink" title="安装 ESLint 解析 TypeScript 的依赖"></a>安装 ESLint 解析 TypeScript 的依赖</h2><pre><code class="bash">$ npm i eslint -D # eslint包$ npm i @typescript-eslint/parser -D # 将 TypeScript 转换为 ESTree，使 eslint 可以识别 ts$ npm i @typescript-eslint/eslint-plugin -D # 定义好的检测Typescript代码的规范</code></pre><h2 id="安装Prettier依赖"><a href="#安装Prettier依赖" class="headerlink" title="安装Prettier依赖"></a>安装Prettier依赖</h2><pre><code class="bash">$ npm i prettier -D # prettier包$ npm i eslint-config-prettier -D # 禁用任何可能干扰现有 prettier 规则的 linting 规则, 一定要把它放在 extends 中最后的位置, 避免再次被打开$ npm i eslint-plugin-prettier -D # 将 Prettier 问题作为ESLint规则提示出来</code></pre><h2 id="配置ESLint"><a href="#配置ESLint" class="headerlink" title="配置ESLint"></a>配置ESLint</h2><pre><code class="js">// .eslintrc.jsmodule.exports = {    // 解析器  parser: &quot;@typescript-eslint/parser&quot;,// 使eslint识别ts  // 现有规则的一系列预设  extends: [    &quot;plugin:@typescript-eslint/recommended&quot;,// 启用@typescript-eslint/eslint-plugin建议规则    &quot;react-app&quot;,// CRA推荐规则    &quot;plugin:prettier/recommended&quot;,// 简化配置: eslint-config-prettier + eslint-plugin-prettier  ],  // 规则  rules: {}};</code></pre><h2 id="安装VSCode插件"><a href="#安装VSCode插件" class="headerlink" title="安装VSCode插件"></a>安装VSCode插件</h2><ul><li>ESLint插件</li><li>注意: 不需要安装Prettier插件, 安装了也无妨</li></ul><h2 id="配置settings"><a href="#配置settings" class="headerlink" title="配置settings"></a>配置settings</h2><pre><code class="js">// workspace settings.json{    // 老版只支持js文件校验, 所以需要配置&quot;eslint.validate&quot;    // 新版不需要配置&quot;eslint.validate&quot;, 增加ts, vue等支持  // &quot;eslint.validate&quot;: [  //   &quot;javascript&quot;,  //   &quot;javascriptreact&quot;,  //   &quot;typescript&quot;,  //   &quot;typescriptreact&quot;  // ],  &quot;editor.formatOnSave&quot;: false,// 保存时, 禁止触发其他扩展格式化代码, 如Prettier  &quot;editor.codeActionsOnSave&quot;: {    &quot;source.fixAll.eslint&quot;: true// 保存时, 运行ESLint检测并格式化代码  }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;创建项目&quot;&gt;&lt;a href=&quot;#创建项目&quot; class=&quot;headerlink&quot; title=&quot;创建项目&quot;&gt;&lt;/a&gt;创建项目&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;$ npx create-react-app app-react-ts --typ
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/tags/React/"/>
+    
+      <category term="TypeScript" scheme="http://wywppkd.github.io/tags/TypeScript/"/>
+    
+      <category term="ESLint" scheme="http://wywppkd.github.io/tags/ESLint/"/>
+    
+      <category term="Prettier" scheme="http://wywppkd.github.io/tags/Prettier/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用TS写React</title>
+    <link href="http://wywppkd.github.io/2020/07/17/%E7%94%A8TS%E5%86%99React/"/>
+    <id>http://wywppkd.github.io/2020/07/17/%E7%94%A8TS%E5%86%99React/</id>
+    <published>2020-07-17T01:27:07.000Z</published>
+    <updated>2020-08-11T01:13:15.976Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-TS重构项目三种方案"><a href="#1-TS重构项目三种方案" class="headerlink" title="1. TS重构项目三种方案"></a>1. TS重构项目三种方案</h2><ol><li>共存策略: TS和JS共存</li><li>宽松策略: 将现有JS改成TS, 代码检测规则按照宽松的规则执行</li><li>严格策略: 开启最严格的检测规则, 一个一个排除报错</li></ol><h2 id="2-TS写函数组件"><a href="#2-TS写函数组件" class="headerlink" title="2. TS写函数组件"></a>2. TS写函数组件</h2><h3 id="2-1-函数声明式"><a href="#2-1-函数声明式" class="headerlink" title="2.1 函数声明式"></a>2.1 函数声明式</h3><pre><code class="tsx">// React.ReactNode: 表示返回的内容function Heading(): React.ReactNode {  return &lt;h1&gt;My Website Heading&lt;/h1&gt;}</code></pre><h3 id="2-2-函数表达式"><a href="#2-2-函数表达式" class="headerlink" title="2.2 函数表达式"></a>2.2 函数表达式</h3><pre><code class="tsx">// React.FC: 因为函数表达式返回一个函数const OtherHeading: React.FC = () =&gt; &lt;h1&gt;My Website Heading&lt;/h1&gt;</code></pre><h2 id="3-TS-写-useState"><a href="#3-TS-写-useState" class="headerlink" title="3. TS 写 useState"></a>3. TS 写 useState</h2><pre><code class="tsx">const [count, setCount] = useState&lt;number&gt;(0);// 不推荐, 类型注解: number类型const [count, setCount] = useState(0);// ok, 推荐用类型推导const [state, setState] = useState&lt;number | null&gt;(null);// 类型注解: 联合类型type ArticleInfo = {  title: string;  content: string;};const [articles, setArticles] = useState&lt;ArticleInfo[]&gt;([]);// 类型注解: 数组</code></pre><h2 id="4-ES6参数默认值代替React的defaultProps"><a href="#4-ES6参数默认值代替React的defaultProps" class="headerlink" title="4. ES6参数默认值代替React的defaultProps"></a>4. ES6参数默认值代替React的defaultProps</h2><ul><li>原因: React.FC不能完美支持defaultProps</li></ul><pre><code class="js">import React from &#39;react&#39;type Props = {  color?: string;  children: React.ReactNode;  onClick: ()  =&gt; void;}// color设置了默认值, 代替defaultPropsconst Button: React.FC&lt;Props&gt; = ({ children, color = &#39;tomato&#39;, onClick }) =&gt; {   return &lt;button style={{ backgroundColor: color }} onClick={onClick}&gt;{children}&lt;/button&gt;}</code></pre><h2 id="5-TS对Redux所有state进行类型约束"><a href="#5-TS对Redux所有state进行类型约束" class="headerlink" title="5. TS对Redux所有state进行类型约束"></a>5. TS对Redux所有state进行类型约束</h2><pre><code class="tsx">// 类型约束: store/index.ts// 将RootState暴露出去: store中所有state状态进行类型约束export type RootState = ReturnType&lt;typeof rootReducer&gt;;</code></pre><pre><code class="tsx">// 使用import { RootState } from &#39;../../store/index&#39;// 使用RootState约束所有stateconst { userReducer, tokenReducer } = useSelector((state: RootState) =&gt; state)</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-TS重构项目三种方案&quot;&gt;&lt;a href=&quot;#1-TS重构项目三种方案&quot; class=&quot;headerlink&quot; title=&quot;1. TS重构项目三种方案&quot;&gt;&lt;/a&gt;1. TS重构项目三种方案&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;共存策略: TS和JS共存&lt;/li&gt;
+&lt;li
+      
+    
+    </summary>
+    
+    
+      <category term="TypeScript" scheme="http://wywppkd.github.io/categories/TypeScript/"/>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/tags/React/"/>
+    
+      <category term="TypeScript" scheme="http://wywppkd.github.io/tags/TypeScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>express-session使用介绍</title>
+    <link href="http://wywppkd.github.io/2019/10/08/express-session%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://wywppkd.github.io/2019/10/08/express-session%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</id>
+    <published>2019-10-08T11:53:20.000Z</published>
+    <updated>2020-08-11T01:13:15.968Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="express-session使用介绍"><a href="#express-session使用介绍" class="headerlink" title="express-session使用介绍"></a>express-session使用介绍</h1><ul><li>session 存储位置: 默认是内存中, 推荐 redis</li><li>1.5.0 版本之后: 不需要借用<code>cookie-parser</code>, 可以直接读取 req.cookies, res.cookies</li></ul><h2 id="生成-session-会话"><a href="#生成-session-会话" class="headerlink" title="生成 session 会话"></a>生成 session 会话</h2><p><code>$ npm i express-session -S</code></p><pre><code class="js">var express = require(&quot;express&quot;);var session = require(&quot;express-session&quot;);var app = express();var sess = session({  name: &quot;sessionId&quot;, // 默认为connect.sid, 推荐使用自定义名称, 更安全  secret: &quot;my_session_secret&quot;, // 建议使用 128 个字符的随机字符串  resave: false, // 即使session会话未更改, 也保存到store中  rolling: true, // 默认false, 是否每次请求都刷新会话有效期  saveUninitialized: true,  // store, // 默认存储在内存中(不推荐,容易内存泄漏), 可以改存放redis中  cookie: {    maxAge: 10 * 60 * 60 * 1000, // 过期时间(毫秒)    // expires, // 过期日期, 不推荐直接设置, 推荐使用maxAge    httpOnly: true // 禁止js操作cookie  }});app.use(sess); // 使用中间件</code></pre><h3 id="saveUninitialized-属性"><a href="#saveUninitialized-属性" class="headerlink" title="saveUninitialized 属性"></a>saveUninitialized 属性</h3><ol><li>false:只有用户登录(req.session 对象被修改)才会生成 session 会话</li><li>true:只要用户访问就会生成 session 会话</li></ol><h2 id="登录的时候修改session信息"><a href="#登录的时候修改session信息" class="headerlink" title="登录的时候修改session信息"></a>登录的时候修改session信息</h2><pre><code class="js">// 登录接口app.post(&quot;/user/login&quot;, function(req, res, next) {  if (req.body.user === &quot;admin&quot; &amp;&amp; req.body.password === &quot;123456&quot;) {    // 验证账号密码成功后, 将用户user写入session信息中    req.session.user = req.body.user;    res.redirect(&quot;/&quot;);  } else {    let error = req.body.user !== &quot;admin&quot; ? &quot;账号错误&quot; : &quot;密码错误&quot;;    res.render(&quot;login&quot;, { error: error });  }});</code></pre><pre><code class="js">// 过滤登录状态中间件app.use(function(req,res,next){  // session中有user属性说明是已登录状态  if (req.session.user || req.path==&quot;/user/login&quot;) {    next();  } else {    res.redirect(&quot;/user/login&quot;);  }})</code></pre><hr><h2 id="req-session对象常用属性和方法"><a href="#req-session对象常用属性和方法" class="headerlink" title="req.session对象常用属性和方法"></a><code>req.session</code>对象常用属性和方法</h2><h3 id="1-访问-session-信息"><a href="#1-访问-session-信息" class="headerlink" title="1. 访问 session 信息"></a>1. 访问 session 信息</h3><pre><code class="js">req.session; // 访问session数据req.session.views = 1; // 给session中添加一个views属性, 值为1</code></pre><h3 id="2-获取-cookie-信息"><a href="#2-获取-cookie-信息" class="headerlink" title="2. 获取 cookie 信息"></a>2. 获取 cookie 信息</h3><pre><code class="js">req.session.cookie; // 每个session都有唯一的cookie与之伴随, 允许你更改每个访问者的session cookie</code></pre><h3 id="3-获取-sessionId"><a href="#3-获取-sessionId" class="headerlink" title="3. 获取 sessionId"></a>3. 获取 sessionId</h3><ul><li>每个 session 都有一个与之关联的唯一 ID</li></ul><pre><code class="js">req.session.id; // 属性是`req.sessionID`的别名且无法改变</code></pre><h3 id="4-销毁-session"><a href="#4-销毁-session" class="headerlink" title="4. 销毁 session"></a>4. 销毁 session</h3><pre><code class="js">// 用户退出登录时调用req.session.destroy(function(err) {  // cannot access session here});</code></pre><h3 id="5-重新生成-session"><a href="#5-重新生成-session" class="headerlink" title="5. 重新生成 session"></a>5. 重新生成 session</h3><pre><code class="js">req.session.regenerate(function(err) {  // will have a new session here});</code></pre><h3 id="6-重载-session-数据"><a href="#6-重载-session-数据" class="headerlink" title="6. 重载 session 数据"></a>6. 重载 session 数据</h3><ul><li>从 store 重载 session 数据, 填充 req.session 对象</li></ul><pre><code class="js">req.session.reload(function(err) {  // session updated});</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;express-session使用介绍&quot;&gt;&lt;a href=&quot;#express-session使用介绍&quot; class=&quot;headerlink&quot; title=&quot;express-session使用介绍&quot;&gt;&lt;/a&gt;express-session使用介绍&lt;/h1&gt;&lt;ul&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Express" scheme="http://wywppkd.github.io/categories/Express/"/>
+    
+    
+      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
+    
+      <category term="express-session" scheme="http://wywppkd.github.io/tags/express-session/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>morgan日志中间件</title>
+    <link href="http://wywppkd.github.io/2019/09/08/morgan%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    <id>http://wywppkd.github.io/2019/09/08/morgan%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6/</id>
+    <published>2019-09-08T12:34:12.000Z</published>
+    <updated>2020-08-11T01:13:15.969Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="morgan日志中间件"><a href="#morgan日志中间件" class="headerlink" title="morgan日志中间件"></a>morgan日志中间件</h1><ul><li>只能记录 http 请求日志</li></ul><pre><code class="bash">$ npm install morgan -S # 下载</code></pre><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre><code class="js">var logger = require(&quot;morgan&quot;);app.use(logger(&quot;dev&quot;)); // 将日志输出到控制台// 方法 路径 状态码 时间 GET /users 200 53.454 ms - 23</code></pre><h2 id="将日志按照日期保存到日志文件中"><a href="#将日志按照日期保存到日志文件中" class="headerlink" title="将日志按照日期保存到日志文件中"></a>将日志按照日期保存到日志文件中</h2><pre><code class="js">var logger = require(&quot;morgan&quot;);var rfs = require(&quot;rotating-file-stream&quot;);// 将日志写入log目录文件中// 解决:时区不一致的问题logger.token(&quot;date&quot;, function() {  var p = new Date()    .toString()    .replace(/[A-Z]{3}\+/, &quot;+&quot;)    .split(/ /);  return p[2] + &quot;/&quot; + p[1] + &quot;/&quot; + p[3] + &quot;:&quot; + p[4] + &quot; &quot; + p[5];});var accessLogStream = rfs.createStream(&quot;access.log&quot;, {  size: &quot;10M&quot;, // 每10M大小轮换  interval: &quot;1d&quot;, // 每天轮换  path: path.join(__dirname, &quot;log&quot;) // 手动创建日志目录&quot;/log&quot;});app.use(logger(&quot;combined&quot;, { stream: accessLogStream }));</code></pre><h3 id="预定义日志格式"><a href="#预定义日志格式" class="headerlink" title="预定义日志格式"></a>预定义日志格式</h3><ul><li>format 即是日志格式, 支持自定义日志格式, 同时 morgan 提供了几个预定义选项:</li></ul><pre><code class="js">// combined ip, 时间, 请求方法, 请求url, HTTP版本, 状态码, 响应内容长度, referrer, user-agent// common ip, 时间, 请求方法, 请求url, HTTP版本, 状态码, 响应内容长度// dev 请求方法, 请求url, 状态码, 响应时间, 响应内容长度// short ip, 请求方法, 请求url, HTTP版本, 状态码, 响应内容长度, 响应时间// tiny 请求方法, 请求url, 状态码, 响应内容长度, 响应时间</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;morgan日志中间件&quot;&gt;&lt;a href=&quot;#morgan日志中间件&quot; class=&quot;headerlink&quot; title=&quot;morgan日志中间件&quot;&gt;&lt;/a&gt;morgan日志中间件&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;只能记录 http 请求日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p
+      
+    
+    </summary>
+    
+    
+      <category term="Express" scheme="http://wywppkd.github.io/categories/Express/"/>
+    
+    
+      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
+    
+      <category term="morgan日志" scheme="http://wywppkd.github.io/tags/morgan%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>切换npm源的几种方式</title>
+    <link href="http://wywppkd.github.io/2019/09/06/%E5%88%87%E6%8D%A2npm%E6%BA%90%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://wywppkd.github.io/2019/09/06/%E5%88%87%E6%8D%A2npm%E6%BA%90%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</id>
+    <published>2019-09-06T07:42:33.000Z</published>
+    <updated>2020-08-11T01:13:15.971Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="切换npm源的几种方式"><a href="#切换npm源的几种方式" class="headerlink" title="切换npm源的几种方式"></a>切换npm源的几种方式</h2><h3 id="手动切换"><a href="#手动切换" class="headerlink" title="手动切换"></a>手动切换</h3><pre><code class="bash">$ npm --registry https://registry.npm.taobao.org # 切换到taobao源, 临时使用$ npm config set registry=https://registry.npm.taobao.org # 切换到taobao源, 长期使用# 删除taobao源  $ npm config delete registry  $ npm config delete disturl</code></pre><h3 id="通过nrm工具管理-推荐"><a href="#通过nrm工具管理-推荐" class="headerlink" title="通过nrm工具管理(推荐)"></a>通过nrm工具管理(推荐)</h3><pre><code class="bash">$ npm install -g nrm # 安装nrm工具$ nrm ls # 查看仓库地址列表(默认有:taobao,yarn,cnpm等源)$ npm use taobao # 切换到taobao的仓库地址$ npm add taobao2 https://registry.npm.taobao.org/ # 添加一个名叫taobao的仓库地址$ npm del taobao2 # 删除一个叫taobao2的仓库地址</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;切换npm源的几种方式&quot;&gt;&lt;a href=&quot;#切换npm源的几种方式&quot; class=&quot;headerlink&quot; title=&quot;切换npm源的几种方式&quot;&gt;&lt;/a&gt;切换npm源的几种方式&lt;/h2&gt;&lt;h3 id=&quot;手动切换&quot;&gt;&lt;a href=&quot;#手动切换&quot; class=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/categories/npm/"/>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/tags/npm/"/>
+    
+      <category term="nrm" scheme="http://wywppkd.github.io/tags/nrm/"/>
+    
+      <category term="npm源" scheme="http://wywppkd.github.io/tags/npm%E6%BA%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟主机种类</title>
+    <link href="http://wywppkd.github.io/2019/05/07/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E7%A7%8D%E7%B1%BB/"/>
+    <id>http://wywppkd.github.io/2019/05/07/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E7%A7%8D%E7%B1%BB/</id>
+    <published>2019-05-07T12:54:33.000Z</published>
+    <updated>2020-08-11T01:13:15.977Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="虚拟主机种类-以nginx为例"><a href="#虚拟主机种类-以nginx为例" class="headerlink" title="虚拟主机种类(以nginx为例)"></a>虚拟主机种类(以nginx为例)</h1><h2 id="1-设置基于域名的虚拟主机"><a href="#1-设置基于域名的虚拟主机" class="headerlink" title="1. 设置基于域名的虚拟主机"></a>1. 设置基于域名的虚拟主机</h2><ol><li><p>设置阿里云域名解析</p><ul><li><a href="http://www.aaa.com" target="_blank" rel="noopener">www.aaa.com</a> nginx所在主机的公网IP</li><li><a href="http://www.bbb.com" target="_blank" rel="noopener">www.bbb.com</a> nginx所在主机的公网IP</li></ul></li><li><p>这里设置两个虚拟主机:</p></li></ol><pre><code class="bash"># /etc/nginx/conf.d/aaa.confserver{  listen 80;  server_name www.aaa.com;  root /usr/share/nginx/html/aaa; # 网站根目录  index index.html; # 网站主页}# /etc/nginx/conf.d/bbb.confserver{  listen 80;  server_name www.bbb.com;  root /usr/share/nginx/html/bbb; # 网站根目录  index index.html; # 网站主页}</code></pre><ul><li><a href="http://www.aaa.com" target="_blank" rel="noopener">www.aaa.com</a> 返回的是aaa目录下的<code>index.html</code></li><li><a href="http://www.bbb.com" target="_blank" rel="noopener">www.bbb.com</a> 返回的是bbb目录下的<code>index.html</code></li><li>但是如果直接访问IP: 返回的是nginx设置的默认网站目录</li></ul><h2 id="2-虚拟主机-基于端口"><a href="#2-虚拟主机-基于端口" class="headerlink" title="2. 虚拟主机(基于端口)"></a>2. 虚拟主机(基于端口)</h2><pre><code class="bash"># /etc/nginx/conf.d/80.confserver{  listen 80;  server_name localhost;  root /usr/share/nginx/html/dir80; # 网站根目录  index index.html; # 网站主页}# /etc/nginx/conf.d/8080.confserver{  listen 8080;  server_name localhost;  root /usr/share/nginx/html/dir8080; # 网站根目录  index index.html; # 网站主页}</code></pre><h3 id="3-基于IP的虚拟主机"><a href="#3-基于IP的虚拟主机" class="headerlink" title="3. 基于IP的虚拟主机"></a>3. 基于IP的虚拟主机</h3><ul><li>很少用</li><li>需要一台服务器有多个IP地址, 不同IP地址对应不同虚拟主机</li></ul><hr><h2 id="nginx虚拟主机配置文件"><a href="#nginx虚拟主机配置文件" class="headerlink" title="nginx虚拟主机配置文件"></a>nginx虚拟主机配置文件</h2><h3 id="1-方式1-修改主配置文件-nginx-conf-nginx-conf"><a href="#1-方式1-修改主配置文件-nginx-conf-nginx-conf" class="headerlink" title="1. 方式1: 修改主配置文件/nginx/conf/nginx.conf"></a>1. 方式1: 修改主配置文件<code>/nginx/conf/nginx.conf</code></h3><pre><code class="bash"># nginx.confhttp{  server{...} # 每一个server就是一个虚拟主机  server{...}  server{...}}</code></pre><h3 id="2-方式2-推荐-增加单独的子配置文件-nginx-conf-conf-d-conf"><a href="#2-方式2-推荐-增加单独的子配置文件-nginx-conf-conf-d-conf" class="headerlink" title="2. 方式2(推荐): 增加单独的子配置文件/nginx/conf/conf.d/*.conf"></a>2. 方式2(推荐): 增加单独的子配置文件<code>/nginx/conf/conf.d/*.conf</code></h3><pre><code class="bash"># /nginx/conf/nginx.conf 主配置文件  include /etc/nginx/conf.d/*.conf; # 设置子配置文件的目录/conf.d/# /etc/nginx/conf.d/abc.conf 虚拟主机1 该目录下每个.conf文件都是一个虚拟主机  server{...}# /etc/nginx/conf.d/def.conf 虚拟主机2  server{...}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;虚拟主机种类-以nginx为例&quot;&gt;&lt;a href=&quot;#虚拟主机种类-以nginx为例&quot; class=&quot;headerlink&quot; title=&quot;虚拟主机种类(以nginx为例)&quot;&gt;&lt;/a&gt;虚拟主机种类(以nginx为例)&lt;/h1&gt;&lt;h2 id=&quot;1-设置基于域名的虚拟
+      
+    
+    </summary>
+    
+    
+      <category term="nginx" scheme="http://wywppkd.github.io/categories/nginx/"/>
+    
+    
+      <category term="虚拟主机" scheme="http://wywppkd.github.io/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/"/>
+    
+      <category term="nginx" scheme="http://wywppkd.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端定位方法</title>
+    <link href="http://wywppkd.github.io/2019/01/07/%E5%89%8D%E7%AB%AF%E5%AE%9A%E4%BD%8D%E6%96%B9%E6%B3%95/"/>
+    <id>http://wywppkd.github.io/2019/01/07/%E5%89%8D%E7%AB%AF%E5%AE%9A%E4%BD%8D%E6%96%B9%E6%B3%95/</id>
+    <published>2019-01-07T05:31:49.000Z</published>
+    <updated>2020-08-11T01:13:15.971Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前端定位方法"><a href="#前端定位方法" class="headerlink" title="前端定位方法"></a>前端定位方法</h1><h2 id="1-H5-定位"><a href="#1-H5-定位" class="headerlink" title="1. H5 定位"></a>1. H5 定位</h2><pre><code class="js">window.navigator.geolocation.getCurrentPosition(  function(position) {    console.log(position.coords); // 坐标    console.log(&quot;经度&quot;, position.coords.longitude); // 经度    console.log(&quot;纬度&quot;, position.coords.latitude); // 纬度  },  function() {    console.log(&quot;定位失败&quot;);  },  { timeout: 5000 });</code></pre><h2 id="2-微信-SDK-定位"><a href="#2-微信-SDK-定位" class="headerlink" title="2. 微信 SDK 定位"></a>2. 微信 SDK 定位</h2><ul><li>仅适用: 微信客户端 H5</li></ul><pre><code class="xml">&lt;script type=&quot;text/javascript&quot; src=&quot;https://res.wx.qq.com/open/js/jweixin-1.0.0.js&quot;&gt;&lt;/script&gt;</code></pre><pre><code class="js">wx.config({  debug: false, // 开启调试模式  appId: data.appId, // 必填，企业号的唯一标识，此处填写企业号corpid  timestamp: data.timestamp, // 必填，生成签名的时间戳  nonceStr: data.nonceStr, // 必填，生成签名的随机串  signature: data.signature, // 必填，签名，见附录1  jsApiList: [&quot;getLocation&quot;] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2});wx.ready(function() {  // 获取经纬度  wx.getLocation({    type: &quot;wgs84&quot;, // 坐标系    success: function(res) {      console.log(res.latitude); // 纬度      console.log(res.longitude); // 经度    },    cancel: function(res) {      alert(        &quot;定位授权失败，请进入【设置】中打开定位服务,并允许微信使用定位服务&quot;      );    },    fail: function(error) {      alert(&quot;定位失败！&quot; + error.errMsg);    }  });});</code></pre><h2 id="3-支付宝-SDK"><a href="#3-支付宝-SDK" class="headerlink" title="3. 支付宝 SDK"></a>3. 支付宝 SDK</h2><ul><li>仅适用: 支付宝客户端 H5</li></ul><pre><code class="js">function ready(callback) {  // 如果jsbridge已经注入则直接调用  if (window.AlipayJSBridge) {    callback &amp;&amp; callback();  } else {    // 如果没有注入则监听注入的事件    document.addEventListener(&quot;AlipayJSBridgeReady&quot;, callback, false);  }}ready(function() {  AlipayJSBridge.call(&quot;getCurrentLocation&quot;, { bizType: &quot;didi&quot; }, function(    result  ) {    if (result.error) {      console.log(&quot;获取定位失败&quot;);      return;    }    console.log(&quot;latitude&quot;, result.latitude); // 纬度    console.log(&quot;longitude&quot;, result.longitude); // 经度  });});</code></pre><h2 id="4-高德定位"><a href="#4-高德定位" class="headerlink" title="4. 高德定位"></a>4. 高德定位</h2><pre><code class="xml">&lt;script type=&quot;text/javascript&quot; src=&quot;http:// webapi.amap.com/maps?v=1.4.1&amp;key=你的key&quot;&gt;&lt;/script&gt;</code></pre><pre><code class="js">var map = new AMap.Map(&quot;iCenter&quot;);map.plugin(&quot;AMap.Geolocation&quot;, function() {  geolocation = new AMap.Geolocation({    enableHighAccuracy: true, // 是否使用高精度定位，默认:true    timeout: 10000, // 超过10秒后停止定位，默认：无穷大    maximumAge: 0, // 定位结果缓存0毫秒，默认：0    convert: true // 自动偏移坐标，偏移后的坐标为高德坐标，默认：true  });  geolocation.getCurrentPosition();  AMap.event.addListener(geolocation, &quot;complete&quot;, onComplete); // 返回定位信息  AMap.event.addListener(geolocation, &quot;error&quot;, onError); // 返回定位出错信息});function onComplete(data) {  console.log(&quot;经度&quot; + data.position.getLng());  console.log(&quot;纬度&quot; + data.position.getLat());}function onError(err) {  console.log(&quot;err&quot;, err);}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前端定位方法&quot;&gt;&lt;a href=&quot;#前端定位方法&quot; class=&quot;headerlink&quot; title=&quot;前端定位方法&quot;&gt;&lt;/a&gt;前端定位方法&lt;/h1&gt;&lt;h2 id=&quot;1-H5-定位&quot;&gt;&lt;a href=&quot;#1-H5-定位&quot; class=&quot;headerlink&quot; ti
+      
+    
+    </summary>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/categories/%E5%AE%9A%E4%BD%8D/"/>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/tags/%E5%AE%9A%E4%BD%8D/"/>
+    
+      <category term="H5" scheme="http://wywppkd.github.io/tags/H5/"/>
+    
+      <category term="微信" scheme="http://wywppkd.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+      <category term="支付宝" scheme="http://wywppkd.github.io/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/"/>
+    
+      <category term="高德" scheme="http://wywppkd.github.io/tags/%E9%AB%98%E5%BE%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>定位技术</title>
+    <link href="http://wywppkd.github.io/2019/01/07/%E5%AE%9A%E4%BD%8D%E6%8A%80%E6%9C%AF/"/>
+    <id>http://wywppkd.github.io/2019/01/07/%E5%AE%9A%E4%BD%8D%E6%8A%80%E6%9C%AF/</id>
+    <published>2019-01-07T05:29:17.000Z</published>
+    <updated>2020-08-11T01:13:15.974Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定位技术"><a href="#定位技术" class="headerlink" title="定位技术"></a>定位技术</h1><h2 id="1-基站定位"><a href="#1-基站定位" class="headerlink" title="1. 基站定位"></a>1. 基站定位</h2><ul><li>根据手机接受不同基站的信号强弱判断两者距离, 基站密度越大越精准</li><li>优点: 定位快, 耗能小</li><li>缺点: 受基站密度影响, 受信号强弱影响</li></ul><h2 id="2-Wifi-定位"><a href="#2-Wifi-定位" class="headerlink" title="2. Wifi 定位"></a>2. Wifi 定位</h2><ul><li>WiFi 信号被设备检测到, 数据库记录这个 WiFi 信号和设备对应的位置</li><li>优点: 解决室内定位问题</li><li>缺点: Wifi 数据库更新不及时</li></ul><h2 id="3-IP-定位"><a href="#3-IP-定位" class="headerlink" title="3. IP 定位"></a>3. IP 定位</h2><ul><li>根据设备的 IP, 查询数据库, 可以粗略地知道这个 ip 所在的地理位置</li><li>缺点: 依赖数据库</li></ul><h2 id="4-GPS-定位-全球定位系统"><a href="#4-GPS-定位-全球定位系统" class="headerlink" title="4. GPS 定位(全球定位系统)"></a>4. GPS 定位(全球定位系统)</h2><ul><li>天上有 24 颗卫星, 通过 4 颗卫星位置以及卫星与设备之间的距离计算出该设备的位置</li><li>优点: 精度高</li><li>缺点: 费电, 不适合室内定位, 首次定位慢</li></ul><h2 id="5-AGPS-定位-辅助-GPS-属于基站定位"><a href="#5-AGPS-定位-辅助-GPS-属于基站定位" class="headerlink" title="5. AGPS 定位(辅助 GPS, 属于基站定位)"></a>5. AGPS 定位(辅助 GPS, 属于基站定位)</h2><ul><li>GPS 定位最初使用有冷启动时间(2-3 分钟), 在此之前借助其他的定位方式(一般是基站定位)进行粗略地定位</li></ul><hr><h2 id="前端常用定位方式"><a href="#前端常用定位方式" class="headerlink" title="前端常用定位方式"></a>前端常用定位方式</h2><ol><li>HTML5 定位</li><li>微信 JSSDK 定位</li><li>支付宝 JSSDK 定位</li><li>高德 JS API 定位</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定位技术&quot;&gt;&lt;a href=&quot;#定位技术&quot; class=&quot;headerlink&quot; title=&quot;定位技术&quot;&gt;&lt;/a&gt;定位技术&lt;/h1&gt;&lt;h2 id=&quot;1-基站定位&quot;&gt;&lt;a href=&quot;#1-基站定位&quot; class=&quot;headerlink&quot; title=&quot;1. 基站
+      
+    
+    </summary>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/categories/%E5%AE%9A%E4%BD%8D/"/>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/tags/%E5%AE%9A%E4%BD%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>地图坐标系</title>
+    <link href="http://wywppkd.github.io/2019/01/07/%E5%9C%B0%E5%9B%BE%E5%9D%90%E6%A0%87%E7%B3%BB/"/>
+    <id>http://wywppkd.github.io/2019/01/07/%E5%9C%B0%E5%9B%BE%E5%9D%90%E6%A0%87%E7%B3%BB/</id>
+    <published>2019-01-07T05:27:55.000Z</published>
+    <updated>2020-08-11T01:13:15.972Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="地图坐标系"><a href="#地图坐标系" class="headerlink" title="地图坐标系"></a>地图坐标系</h1><h2 id="地图坐标系有哪些"><a href="#地图坐标系有哪些" class="headerlink" title="地图坐标系有哪些"></a>地图坐标系有哪些</h2><ul><li>wgs284(地球坐标) 国际标准</li><li>gcj-02(火星坐标) 中国标准<ul><li>国内出版各种地图系统, 必须至少采用 gcj-02 对地理位置进行首次加密</li></ul></li><li>bg-09(百度坐标) 百度标准<ul><li>百度: 在火星坐标上二次加密</li></ul></li></ul><h2 id="开发中注意"><a href="#开发中注意" class="headerlink" title="开发中注意"></a>开发中注意</h2><h3 id="1-目前各种-sdk-使用的坐标系"><a href="#1-目前各种-sdk-使用的坐标系" class="headerlink" title="1. 目前各种 sdk 使用的坐标系"></a>1. 目前各种 sdk 使用的坐标系</h3><ul><li>如果是百度 SDK, 默认 bd-09,或 gcj-02</li><li>如果是 iOS 原生定位, 默认 wgs284</li><li>如果是高德 sdk, 默认 gcj02</li></ul><h3 id="2-目前各大地图商使用的坐标系"><a href="#2-目前各大地图商使用的坐标系" class="headerlink" title="2. 目前各大地图商使用的坐标系"></a>2. 目前各大地图商使用的坐标系</h3><ul><li>iOS 地图(高德) : gcj-02</li><li>国内 google 地图 : gcj-02</li><li>搜搜,阿里云,高德地图 : gcj-02</li><li>百度地图 : bd-09</li><li>国外 google 地图, 以及国外其他地图 : wgs84</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;地图坐标系&quot;&gt;&lt;a href=&quot;#地图坐标系&quot; class=&quot;headerlink&quot; title=&quot;地图坐标系&quot;&gt;&lt;/a&gt;地图坐标系&lt;/h1&gt;&lt;h2 id=&quot;地图坐标系有哪些&quot;&gt;&lt;a href=&quot;#地图坐标系有哪些&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/categories/%E5%AE%9A%E4%BD%8D/"/>
+    
+    
+      <category term="定位" scheme="http://wywppkd.github.io/tags/%E5%AE%9A%E4%BD%8D/"/>
+    
+      <category term="坐标系" scheme="http://wywppkd.github.io/tags/%E5%9D%90%E6%A0%87%E7%B3%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开发npm包简单流程</title>
+    <link href="http://wywppkd.github.io/2018/12/04/%E5%BC%80%E5%8F%91npm%E5%8C%85%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B/"/>
+    <id>http://wywppkd.github.io/2018/12/04/%E5%BC%80%E5%8F%91npm%E5%8C%85%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B/</id>
+    <published>2018-12-04T10:40:52.000Z</published>
+    <updated>2020-08-11T01:13:15.976Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="开发一个npm包"><a href="#开发一个npm包" class="headerlink" title="开发一个npm包"></a>开发一个npm包</h2><h3 id="1-注册npm账号"><a href="#1-注册npm账号" class="headerlink" title="1. 注册npm账号"></a>1. 注册npm账号</h3><ul><li><a href="https://www.npmjs.com/" target="_blank" rel="noopener">https://www.npmjs.com/</a></li></ul><h3 id="2-配置package-json"><a href="#2-配置package-json" class="headerlink" title="2. 配置package.json"></a>2. 配置<code>package.json</code></h3><pre><code class="bash">$ mkdir modal-helper$ cd modal-helper$ npm init --y # 初始化</code></pre><pre><code class="javascript">// package.json{  &quot;name&quot;: &quot;modal-helper&quot;,  &quot;version&quot;: &quot;1.0.0&quot;,           // 大迭代.功能叠加.修复bug  &quot;description&quot;: &quot;防止弹框滚动穿透的一种解决方式&quot;,     // 描述信息  &quot;main&quot;: &quot;index.js&quot;,           // 入口文件名  &quot;scripts&quot;: {    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;    // 测试命令(可以不写)  },  &quot;repository&quot;: {    &quot;type&quot;: &quot;git&quot;,    &quot;url&quot;: &quot;git+https://github.com/wywppkd/modal-helper.git&quot;  // github仓库地址  },  &quot;keywords&quot;: [                // 关键词    &quot;关键词1&quot;,                      &quot;关键词2&quot;,    &quot;关键词3&quot;  ],  &quot;author&quot;: &quot;wywppkd&quot;,        // 作者  &quot;license&quot;: &quot;MIT&quot;,           // 开源协议  &quot;bugs&quot;: {    &quot;url&quot;: &quot;https://github.com/wywppkd/modal-helper/issues&quot;  },  &quot;homepage&quot;: &quot;https://github.com/wywppkd/modal-helper#readme&quot;}</code></pre><h4 id="name包命名规范"><a href="#name包命名规范" class="headerlink" title="name包命名规范"></a>name包命名规范</h4><ol><li>不能以点或下划线开头</li><li>不能包含大写字母</li><li>不能包含任何非URL安全字符(因为包名最终会成为URL的一部分)</li><li>小于或等于214个字符</li><li>不可以与现有包名类似:<ul><li>与react-native包冲突的命名<ul><li>reactnative</li><li>react_native</li><li>eact.native</li></ul></li></ul></li><li>推荐命名:<ul><li>普通命名: modal-helper</li><li>作用域命名: @wywppkd/modal-helper </li></ul></li></ol><h3 id="4-开发你的包…"><a href="#4-开发你的包…" class="headerlink" title="4. 开发你的包…"></a>4. 开发你的包…</h3><h3 id="5-将开发的代码上传到npm官方服务器"><a href="#5-将开发的代码上传到npm官方服务器" class="headerlink" title="5. 将开发的代码上传到npm官方服务器"></a>5. 将开发的代码上传到npm官方服务器</h3><blockquote><p>注意需要保证npm源为官方地址</p></blockquote><pre><code class="bash">$ npm login  # 登录npm账户    # 输入账户密码邮箱$ npm publish # 上传代码(普通包名)$ npm publish --access=public # 上传代码(如果是作用域命名的包@wywppkd/modal-helper)</code></pre><hr><h3 id="尝试下载"><a href="#尝试下载" class="headerlink" title="尝试下载"></a>尝试下载</h3><pre><code class="bash">$ npm install modal-helper --save # 下载  # 整个目录下文件都会下载至node_modules/modal-helper</code></pre><h3 id="迭代npm包"><a href="#迭代npm包" class="headerlink" title="迭代npm包"></a>迭代npm包</h3><ul><li>每次迭代后必须修改<code>package.json</code>的version(版本号)属性</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;开发一个npm包&quot;&gt;&lt;a href=&quot;#开发一个npm包&quot; class=&quot;headerlink&quot; title=&quot;开发一个npm包&quot;&gt;&lt;/a&gt;开发一个npm包&lt;/h2&gt;&lt;h3 id=&quot;1-注册npm账号&quot;&gt;&lt;a href=&quot;#1-注册npm账号&quot; class=&quot;he
+      
+    
+    </summary>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/categories/npm/"/>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/tags/npm/"/>
+    
+      <category term="开发npm包" scheme="http://wywppkd.github.io/tags/%E5%BC%80%E5%8F%91npm%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AMD规范-require.js使用</title>
+    <link href="http://wywppkd.github.io/2018/06/23/AMD%E8%A7%84%E8%8C%83-require-js%E4%BD%BF%E7%94%A8/"/>
+    <id>http://wywppkd.github.io/2018/06/23/AMD%E8%A7%84%E8%8C%83-require-js%E4%BD%BF%E7%94%A8/</id>
+    <published>2018-06-23T07:45:24.000Z</published>
+    <updated>2020-08-11T01:13:15.964Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="AMD规范"><a href="#AMD规范" class="headerlink" title="AMD规范"></a>AMD规范</h3><ul><li>主要实践者: require.js</li><li>require.config()指定引用路径等</li><li>define()定义模块</li><li>require()加载模块</li></ul><h3 id="define-定义一个普通AMD模块"><a href="#define-定义一个普通AMD模块" class="headerlink" title="define()定义一个普通AMD模块"></a>define()定义一个普通AMD模块</h3><pre><code class="js">// math.jsdefine(function(){  var add = function(x,y){    return x+y;  }  return {    add: add  }})</code></pre><h3 id="require-加载模块"><a href="#require-加载模块" class="headerlink" title="require()加载模块"></a>require()加载模块</h3><ol><li><p>在html页面中加载主模块</p><pre><code class="html">&lt;script src=&quot;js/require.js&quot; data-main=&quot;js/main&quot;&gt;&lt;/script&gt;&lt;!-- data-main属性: 指定主模块, js/main.js 这个文件会被require.js第一个加载 --&gt;</code></pre></li><li><p>在主模块<code>/js/main.js</code>中配置依赖模块</p><pre><code class="js">// /js/main.js// 配置项: 可以指定模块文件的路径 require.config({   baseUrl: &quot;js/lib&quot;,// 所有模块都从该路径下加载   paths: {     &quot;jquery&quot;: &quot;jquery.min&quot;,     &quot;underscore&quot;: &quot;underscore.min&quot;,     &quot;backbone&quot;: &quot;backbone.min&quot;   } });// AMD规范的require()函数// 第一个参数: 数组(表示依赖的模块)// 第二个参数: 回调函数(当前面指定的模块加载成功后调用)require([&#39;jquery&#39;, &#39;underscore&#39;, &#39;backbone&#39;], function ($, _, Backbone){ // require.js会先加载jQuery、underscore和backbone，然后再运行回调函数 // 主模块代码就写在这个回调函数中});</code></pre></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;AMD规范&quot;&gt;&lt;a href=&quot;#AMD规范&quot; class=&quot;headerlink&quot; title=&quot;AMD规范&quot;&gt;&lt;/a&gt;AMD规范&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;主要实践者: require.js&lt;/li&gt;
+&lt;li&gt;require.config()指定引用路径等&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/categories/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+      <category term="AMD" scheme="http://wywppkd.github.io/tags/AMD/"/>
+    
+      <category term="require.js" scheme="http://wywppkd.github.io/tags/require-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6模块化</title>
+    <link href="http://wywppkd.github.io/2018/06/17/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://wywppkd.github.io/2018/06/17/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/</id>
+    <published>2018-06-17T06:34:12.000Z</published>
+    <updated>2020-08-11T01:13:15.967Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="ES6-Module"><a href="#ES6-Module" class="headerlink" title="ES6 Module"></a>ES6 Module</h2><ul><li>主要由两个命令构成: export import</li><li>编译时就引入模块代码, 而不是运行时加载</li><li>无法实现条件加载, 可以实现静态分析</li></ul><h3 id="export导出-推荐"><a href="#export导出-推荐" class="headerlink" title="export导出(推荐)"></a>export导出(推荐)</h3><pre><code class="js">// 导出写法一  export var name = &quot;Tom&quot;; // 导出变量  export function say() {  // 导出函数    console.log(&quot;say something&quot;)  };// 导出写法二(推荐)  var name = &quot;Tom&quot;;  var say = function(){    console.log(&quot;say something&quot;)  }  export {    name,    say  }// 导入写法一(选择性导入)import {name,say} from &quot;./app.js&quot;console.log(name)console.log(say())// 导入写法二(一次加载所有方法)import * as app from &quot;./app.js&quot;console.log(app.name)console.log(app.say())</code></pre><h3 id="export-default导出"><a href="#export-default导出" class="headerlink" title="export default导出"></a>export default导出</h3><ul><li>一个模块只能使用一个<code>export default</code><pre><code class="js">// 导出一个变量export default function say(){  console.log(&quot;say something&quot;)}</code></pre></li></ul><p>// 导出多个变量<br>  var name = “Tom”<br>  var say = function(){<br>    console.log(“say something”)<br>  }<br>  export default {<br>    name,<br>    say<br>  };</p><p>// 导入<br>import app from ‘./app.js’</p><pre><code>#### export和export default区别1. 一个模块中, export可以有多个, export default只能有一个2. export可以导出变量表达式, 而export default不行  ```js  export const a = &#39;100&#39;; // 正确  export defult const a = &#39;100&#39;; // 错误, 将变量a赋值给变量default    // export default其实是输出了一个叫default的变量, 所以后面不能跟变量声明语句</code></pre><ol start="3"><li>export不能直接输出变量, export default可以</li><li>export和export default对应的导入方式不同</li></ol><h3 id="import详解"><a href="#import详解" class="headerlink" title="import详解"></a>import详解</h3><ul><li>import在编译阶段会提升到模块顶部</li><li>import导入的模块是只读的, 不允许改写<pre><code class="js">// import可以省略文件后缀import math from &#39;math.js&#39; // ==&gt;import math from &#39;math&#39; // 导入math.js文件时, 可以省略文件后缀</code></pre></li></ul><p>// import可以省略index.js文件名<br>  import math from ‘mathDir/index.js’ // ==&gt;<br>  import math from ‘mathDir’ // 导入mathDir/index.js文件时, 可以省略文件名</p><p>// import支持起别名<br>  import {math as myMath} from ‘./math’ // 必须是export导出的方式</p><pre><code>---### 扩展: export和import同时使用实现转发- 同时导入并导出一个模块```js// 从my_module中导入foo和bar, 同时导出这两个方法// 实现了转发的效果, 注意当前模块不能使用foo和bar    export { foo, bar } from &#39;my_module&#39;;  // 可以简单理解为      import { foo, bar } from &#39;my_module&#39;; // 导入      export { foo, bar }; // 导出</code></pre><p>应用: 在框架中常见用法: 跨模块常量</p><ul><li>项目中使用的常量可以统一在<code>constants</code>目录下管理<pre><code class="js">.├── constants  // 该目录下放置了一些模块|   ├── db.js // 数据库账户信息|   ├── user.js // 用户信息|   └── index.js // 合并当目录constants下所有模块, 并导出所有└── xxx.js       // 在其他文件中使用这些常量</code></pre></li></ul><p>// constants/db.js 数据库账户信息<br>  export const db = {<br>    url: ‘<a href="http://my.couchdbserver.local:5984&#39;" target="_blank" rel="noopener">http://my.couchdbserver.local:5984&#39;</a>,<br>    admin_username: ‘admin’,<br>    admin_password: ‘admin password’<br>  };</p><p>// constants/user.js 用户信息<br>  export const users = [‘root’, ‘admin’, ‘staff’, ‘ceo’, ‘chief’, ‘moderator’];</p><p>// constants/index.js 导入db,users模块, 并一次性导出<br>  export {db} from ‘./db’;<br>  export {users} from ‘./users’;</p><p>// xxx.js<br>  import {db, users} from ‘./constants/index’;</p><pre><code></code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;ES6-Module&quot;&gt;&lt;a href=&quot;#ES6-Module&quot; class=&quot;headerlink&quot; title=&quot;ES6 Module&quot;&gt;&lt;/a&gt;ES6 Module&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;主要由两个命令构成: export import&lt;/li&gt;
+&lt;l
+      
+    
+    </summary>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/categories/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+      <category term="ES6" scheme="http://wywppkd.github.io/tags/ES6/"/>
+    
+      <category term="export" scheme="http://wywppkd.github.io/tags/export/"/>
+    
+      <category term="import" scheme="http://wywppkd.github.io/tags/import/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CommonJS模块化规范</title>
+    <link href="http://wywppkd.github.io/2018/06/13/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/"/>
+    <id>http://wywppkd.github.io/2018/06/13/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/</id>
+    <published>2018-06-13T11:43:27.000Z</published>
+    <updated>2020-08-11T01:13:15.965Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><ul><li>主要实践者: Node</li><li>包含四个环境变量: module exports require global</li><li>CommonJS是同步加载模块</li><li>适合场景:<ul><li>服务端读取本地磁盘非常快, 所以很适合该规范</li><li>而浏览器端受限网络, 更适合异步加载</li></ul></li></ul><h3 id="CommonJS模块导出"><a href="#CommonJS模块导出" class="headerlink" title="CommonJS模块导出"></a>CommonJS模块导出</h3><pre><code class="js">// app.js// 一个一个导出module.exports.name = &quot;Tom&quot;;module.exports.say = function(){  console.log(&quot;say something&quot;)}// 整体导出var name = &quot;Tom&quot;;function say(){  console.log(&quot;say something&quot;)}module.exports = {  name: name,  say: say}</code></pre><h3 id="CommonJS模块导入"><a href="#CommonJS模块导入" class="headerlink" title="CommonJS模块导入"></a>CommonJS模块导入</h3><pre><code class="js">// main.js// 导入const app = require(&#39;./app&#39;); // 可以省略文件后缀console.log(app.name)console.log(app.say())</code></pre><h4 id="exports-和-module-exports的区别"><a href="#exports-和-module-exports的区别" class="headerlink" title="exports 和 module.exports的区别"></a>exports 和 module.exports的区别</h4><ol><li>node执行一个文件时, 会生成一个exports和module对象</li><li>而module又有一个exports属性, 他们都指向一块内存区域 exports === module.exports</li><li>当添加<code>exports.a=200</code>, module.exports同时享有属性a</li><li>最终require()导入的是module.exports</li><li>可以看出exports是辅助module.exports操作内存中的数据用的;</li></ol><ul><li>建议: 为了防止混乱, 不推荐使用exports, 建议只使用module.exports</li></ul><h3 id="require详解"><a href="#require详解" class="headerlink" title="require详解"></a>require详解</h3><p>当Node执行遇到require(x)</p><ol><li><p>如果x是核心模块: 如require(‘fs’)</p><ul><li>返回该模块</li></ul></li><li><p>如果x以”./“,”/“,”../“开头</p><ul><li><p>根据x所在父模块, 确定x的绝对路径</p></li><li><p>将x当成文件, 依次查找下面文件</p><pre><code class="js">xx.jsx.jsonx.node</code></pre></li><li><p>如果没找到, 则把x当成目录, 依次查找下面的文件</p><pre><code class="js">x/package.json(main字段)x/index.jsx/index.jsonx/index.node</code></pre></li></ul></li><li><p>如果x不带路径, 并且也不是核心模块</p><ul><li>根据x所在父模块(也就是使用require(x)的模块), 确认x可能的安装目录</li><li>依次在每个目录下, 将x当前文件名和目录名从<code>node_modules</code>目录下加载</li></ul></li></ol><pre><code class="js">// require常见用法const fs = require(&#39;fs&#39;); // 核心模块const math = require(&#39;./math&#39;); // 自定义模块, 当前目录下的math.js文件const vue = require(&#39;vue&#39;); // node_modules目录下的第三方包</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;CommonJS&quot;&gt;&lt;a href=&quot;#CommonJS&quot; class=&quot;headerlink&quot; title=&quot;CommonJS&quot;&gt;&lt;/a&gt;CommonJS&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;主要实践者: Node&lt;/li&gt;
+&lt;li&gt;包含四个环境变量: module ex
+      
+    
+    </summary>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/categories/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+      <category term="CommonJS" scheme="http://wywppkd.github.io/tags/CommonJS/"/>
+    
+      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
+    
+      <category term="module.exports" scheme="http://wywppkd.github.io/tags/module-exports/"/>
+    
+      <category term="require" scheme="http://wywppkd.github.io/tags/require/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js模块化介绍</title>
+    <link href="http://wywppkd.github.io/2018/06/05/js%E6%A8%A1%E5%9D%97%E5%8C%96%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://wywppkd.github.io/2018/06/05/js%E6%A8%A1%E5%9D%97%E5%8C%96%E4%BB%8B%E7%BB%8D/</id>
+    <published>2018-06-05T08:37:56.000Z</published>
+    <updated>2020-08-11T01:13:15.969Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h2><p>  通常一个文件是一个模块,有自己的作用域,只对外暴露特定变量和函数</p><h2 id="为什么使用模块化"><a href="#为什么使用模块化" class="headerlink" title="为什么使用模块化"></a>为什么使用模块化</h2><ol><li>代码复用</li><li>解决依赖关系, 利于维护</li><li>避免全局变量污染</li></ol><h2 id="JS模块化规范有哪些"><a href="#JS模块化规范有哪些" class="headerlink" title="JS模块化规范有哪些:"></a>JS模块化规范有哪些:</h2><ul><li>IIFE(早期): 立即执行的匿名函数, 就是一个模块, 匿名函数内部变量不会污染全局对象</li><li>CommonJS</li><li>ES6 Module</li><li>AMD</li><li>CMD</li></ul><hr><h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><ul><li>主要实践者: Node</li><li>包含四个环境变量: module exports require global</li><li>CommonJS是同步加载模块</li><li>适合场景:<ul><li>服务端读取本地磁盘非常快, 所以很适合该规范</li><li>而浏览器端受限网络, 更适合异步加载</li></ul></li></ul><h3 id="ES6-Module"><a href="#ES6-Module" class="headerlink" title="ES6 Module"></a>ES6 Module</h3><ul><li>主要由两个命令构成: export import</li><li>编译时就引入模块代码, 而不是运行时加载</li><li>无法实现条件加载, 可以实现静态分析</li></ul><h3 id="ES6-Module与CommonJS的差异"><a href="#ES6-Module与CommonJS的差异" class="headerlink" title="ES6 Module与CommonJS的差异"></a>ES6 Module与CommonJS的差异</h3><ol><li>CommonJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用。</li><li>CommonJS模块是运行时加载，ES6模块是编译时加载(所以import存在变量提升)<ul><li>运行时加载: CommonJS模块就是对象(即module.exports属性)</li><li>编译时加载: ES6模块不是对象，而是通过export命令显式指定输出的代码，import时采用静态命令的形式。即在import时可以指定加载某个输出 值，而不是加载整个模块，这种加载称为“编译时加载”</li></ul></li><li>require支持动态加载, 而import不支持</li></ol><h3 id="AMD规范"><a href="#AMD规范" class="headerlink" title="AMD规范"></a>AMD规范</h3><ul><li>主要实践者: require.js</li><li>require.config()指定引用路径等</li><li>define()定义模块</li><li>require()加载模块</li></ul><h3 id="CMD规范"><a href="#CMD规范" class="headerlink" title="CMD规范"></a>CMD规范</h3><ul><li>主要实践者: sea.js</li><li>define()定义模块</li><li>use()加载模块</li></ul><h3 id="require-js和sea-js异同"><a href="#require-js和sea-js异同" class="headerlink" title="require.js和sea.js异同"></a>require.js和sea.js异同</h3><ul><li><p>相同点:requirejs 和 seajs 都是异步加载模块的</p></li><li><p>不同:</p><ol><li>requirejs 特点是依赖前置，指的是所有依赖提前加载完成</li><li>seajs 特点是就近依赖,指的就是:什么时候用某个模块,那么就什么时候去加载这个模块</li></ol><p>但是实际使用中,sea.js也是提前加载完依赖模块, 才执行function,也就跟require.js没什么区别了</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;什么是模块化&quot;&gt;&lt;a href=&quot;#什么是模块化&quot; class=&quot;headerlink&quot; title=&quot;什么是模块化&quot;&gt;&lt;/a&gt;什么是模块化&lt;/h2&gt;&lt;p&gt;  通常一个文件是一个模块,有自己的作用域,只对外暴露特定变量和函数&lt;/p&gt;
+&lt;h2 id=&quot;为什么使用模块
+      
+    
+    </summary>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/categories/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+    
+      <category term="js模块化" scheme="http://wywppkd.github.io/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+      <category term="AMD" scheme="http://wywppkd.github.io/tags/AMD/"/>
+    
+      <category term="CommonJS" scheme="http://wywppkd.github.io/tags/CommonJS/"/>
+    
+      <category term="ES6 Module" scheme="http://wywppkd.github.io/tags/ES6-Module/"/>
+    
+      <category term="CMD" scheme="http://wywppkd.github.io/tags/CMD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>npm常用操作</title>
+    <link href="http://wywppkd.github.io/2018/05/04/npm%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+    <id>http://wywppkd.github.io/2018/05/04/npm%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</id>
+    <published>2018-05-04T07:06:15.000Z</published>
+    <updated>2020-08-11T01:13:15.970Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="npm更新"><a href="#npm更新" class="headerlink" title="npm更新"></a>npm更新</h3><pre><code class="bash">$ npm install npm@latest -g   # 更新npm到稳定版$ npm install npm@next -g     # 更新npm开发版</code></pre><blockquote><p>注意:npm下载模块的时候不要用鼠标点命令行, 容易导致下载阻塞</p><blockquote><p>如果下载阻塞了, 按下<code>Esc</code>可恢复下载</p></blockquote></blockquote><hr><h3 id="npm包管理"><a href="#npm包管理" class="headerlink" title="npm包管理"></a>npm包管理</h3><pre><code class="bash"># 全局  # 安装    $ npm i -g eslint  # 展示需要更新的模块    $ npm outdated -g --depth=0  # 更新指定模块    $ npm update -g eslint  # 卸载指定模块    $ npm uninstall -g eslint  # 查看所有全局安装的模块    $ npm ls -g  # 查看全局路径目录    $ npm config get prefix  # 修改全局路径目录    $ npm config set prefix &quot;./目录路径&quot;# 本地  # 安装    $ npm i eslint      $ npm install eslint@latest # 更新到最新版      $ npm install eslint@2.6.5  # 更新或回退到指定版本  # 展示需要更新的模块    $ npm outdated  # 更新指定模块    $ npm update eslint  # 更新所有模块    $ npm update  # 查看所有本地安装的模块    $ npm ls  # 查看单个模块的具体信息    $ npm ls eslint  # 卸载指定模块    $ npm uninstall eslint# 缓存  # 清除本地缓存    $ npm cache clean -f #-f 强制 -force  # 优先从缓存下载    $ npm install webpack  --cache-min 99999</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;npm更新&quot;&gt;&lt;a href=&quot;#npm更新&quot; class=&quot;headerlink&quot; title=&quot;npm更新&quot;&gt;&lt;/a&gt;npm更新&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;$ npm install npm@latest -g   # 更新npm
+      
+    
+    </summary>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/categories/npm/"/>
+    
+    
+      <category term="npm" scheme="http://wywppkd.github.io/tags/npm/"/>
+    
+      <category term="npm常用操作" scheme="http://wywppkd.github.io/tags/npm%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小程序格式化金额输入</title>
+    <link href="http://wywppkd.github.io/2018/03/07/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%87%91%E9%A2%9D%E8%BE%93%E5%85%A5/"/>
+    <id>http://wywppkd.github.io/2018/03/07/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%87%91%E9%A2%9D%E8%BE%93%E5%85%A5/</id>
+    <published>2018-03-07T11:15:43.000Z</published>
+    <updated>2020-08-11T01:13:15.974Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="金额输入限制条件"><a href="#金额输入限制条件" class="headerlink" title="金额输入限制条件"></a>金额输入限制条件</h2><blockquote><p>参考支付宝|微信支付的时候输入金额的限制</p></blockquote><ol><li>只能输入0-9和小数点”.”</li><li>首位不能出现两个0</li><li>第二位不是小数点”.”的情况下, 首位不能是0</li><li>首位不能出现小数点”.”</li><li>小数点”.”只能出现一次</li><li>小数点”.”后最多两位</li></ol><pre><code class="js">Page({  // 格式化输入的金额  formatAmount(val) {    let num = val.toString(); // 先转换成字符串类型    if (num.indexOf(&#39;.&#39;) == 0) { // 第一位就是&quot;.&quot;, 则前面补0      num = &#39;0&#39; + num    }    num = num.replace(/[^\d.]/g, &quot;&quot;);  // 清除&quot;数字&quot;和&quot;.&quot;以外的字符    num = num.replace(/\.{2,}/g, &quot;.&quot;); // 只保留第一个&quot;.&quot;清除多余的    num = num.replace(&quot;.&quot;, &quot;$#$&quot;).replace(/\./g, &quot;&quot;).replace(&quot;$#$&quot;, &quot;.&quot;);    num = num.replace(/^(\-)*(\d+)\.(\d\d).*$/, &#39;$1$2.$3&#39;); // 小数点后只能输入两位    if (num.indexOf(&quot;.&quot;) &lt; 0 &amp;&amp; num != &quot;&quot;) {      num = parseFloat(num);    }    return num  },  // input输入事件  inputEvent(e){    this.setData({      oilAmount: this.formatAmount(e.detail.value)  // money匹配金额输入规则，返回输入值    });  }})</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;金额输入限制条件&quot;&gt;&lt;a href=&quot;#金额输入限制条件&quot; class=&quot;headerlink&quot; title=&quot;金额输入限制条件&quot;&gt;&lt;/a&gt;金额输入限制条件&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;参考支付宝|微信支付的时候输入金额的限制&lt;/p&gt;
+&lt;/blockq
+      
+    
+    </summary>
+    
+    
+      <category term="小程序" scheme="http://wywppkd.github.io/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+      <category term="小程序" scheme="http://wywppkd.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="金额输入" scheme="http://wywppkd.github.io/tags/%E9%87%91%E9%A2%9D%E8%BE%93%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>命令行切换小程序开发环境</title>
+    <link href="http://wywppkd.github.io/2018/03/03/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%87%E6%8D%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>http://wywppkd.github.io/2018/03/03/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%87%E6%8D%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</id>
+    <published>2018-03-03T07:28:42.000Z</published>
+    <updated>2020-08-11T01:13:15.972Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="命令行切换小程序开发环境"><a href="#命令行切换小程序开发环境" class="headerlink" title="命令行切换小程序开发环境"></a>命令行切换小程序开发环境</h2><ul><li>只需要使用node+npm, 就可以实现切换小程序的开发环境</li><li>实现思路: 使用npm脚本(npm scripts)指定node脚本<code>main.js</code>. 并根据参数, 将指定的<code>configs/xxx.js</code>配置文件内容读取并写入到当前使用的配置文件<code>ext.js</code>中</li></ul><h3 id="目录介绍"><a href="#目录介绍" class="headerlink" title="目录介绍"></a>目录介绍</h3><pre><code class="js">├── configs // 不同环境的配置文件都在这个目录│   │── ext.test120001.js // 测试环境1│   │── ext.test120002.js // 测试环境2│   │── ext.dev120001.js // 开发环境1│   │── ext.dev120002.js // 开发环境2│   │── ext.prod120001.js // 生产环境1│   └── ext.prod120002.js // 生产环境2││── ext.js // 当前使用的配置文件│── app.js // 小程序的app.js│── main.js // node执行脚本└── package.json // package.json配置文件</code></pre><h4 id="config-ext-test120001-js-示例"><a href="#config-ext-test120001-js-示例" class="headerlink" title="/config/ext.test120001.js 示例"></a><code>/config/ext.test120001.js</code> 示例</h4><pre><code class="js">// /config/ext.test120001.js 示例export default {  &quot;blockId&quot;: &quot;120001&quot;,// 自定义参数  &quot;baseURL&quot;: &quot;https://test.yourdomain.com&quot;,// 接口地址  &quot;defaultTitle&quot;: &quot;y约油-测试&quot; // 小程序首页title}</code></pre><h4 id="小程序app-js文件"><a href="#小程序app-js文件" class="headerlink" title="小程序app.js文件"></a>小程序<code>app.js</code>文件</h4><pre><code class="js">// app.jsimport extJson from &#39;./ext.js&#39;;App({  globalData:{    extJson // ext.js中的环境配置参数  }})</code></pre><h4 id="node脚本main-js"><a href="#node脚本main-js" class="headerlink" title="node脚本main.js"></a>node脚本<code>main.js</code></h4><pre><code class="js">// main.jsconst process = require(&#39;process&#39;)const fs = require(&#39;fs&#39;) //文件读取和写入const arr = process.argv // 命令行参数[]const NODE_ENV = arr[2] // node命令第3个参数// 各个环境对应的小程序名称const configs = {  &#39;dev120001&#39;: &#39;开发小程序1&#39;,  &#39;dev120002&#39;: &#39;开发小程序2&#39;,  &#39;test120001&#39;: &#39;测试小程序1&#39;,  &#39;test120002&#39;: &#39;测试小程序2&#39;,  &#39;prod120001&#39;: &#39;生产小程序1&#39;,  &#39;prod120002&#39;: &#39;生产小程序2&#39;}if (NODE_ENV) {  let read = fs.readFileSync(`./configs/ext.${NODE_ENV}.js`, &#39;utf-8&#39;)  fs.writeFile(&#39;./ext.js&#39;, read, &#39;utf-8&#39;, err =&gt; {    if (err) {      console.error(`切换环境${NODE_ENV}失败`)    } else {      console.log(`切换环境${NODE_ENV}成功, 请切换小程序至==&gt;${configs[NODE_ENV]}`)    }  })}</code></pre><h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a><code>package.json</code></h4><pre><code class="js">{  &quot;scripts&quot;: {    &quot;test120001&quot;: &quot;node ./main.js test120001&quot;,    &quot;test120002&quot;: &quot;node ./main.js test120002&quot;,    &quot;dev120001&quot;: &quot;node ./main.js dev120001&quot;,    &quot;dev120002&quot;: &quot;node ./main.js dev120002&quot;,    &quot;prod120001&quot;: &quot;node ./main.js prod120001&quot;,    &quot;prod120002&quot;: &quot;node ./main.js prod120002&quot;  }}</code></pre><h3 id="命令行切换环境"><a href="#命令行切换环境" class="headerlink" title="命令行切换环境"></a>命令行切换环境</h3><pre><code class="bash">$ npm run dev120001 # 切换到开发环境1$ npm run dev120002 # 切换到开发环境2$ npm run test120001 # 切换到测试环境1$ npm run test120002 # 切换到测试环境2$ npm run prod120001 # 切换到生产环境1$ npm run prod120001 # 切换到生产环境2</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;命令行切换小程序开发环境&quot;&gt;&lt;a href=&quot;#命令行切换小程序开发环境&quot; class=&quot;headerlink&quot; title=&quot;命令行切换小程序开发环境&quot;&gt;&lt;/a&gt;命令行切换小程序开发环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;只需要使用node+npm, 就可以实现切换小程
+      
+    
+    </summary>
+    
+    
+      <category term="小程序" scheme="http://wywppkd.github.io/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
+    
+      <category term="小程序" scheme="http://wywppkd.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="开发环境" scheme="http://wywppkd.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何找到公众号的推荐关注链接</title>
+    <link href="http://wywppkd.github.io/2017/12/31/%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E6%8E%A8%E8%8D%90%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/"/>
+    <id>http://wywppkd.github.io/2017/12/31/%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E6%8E%A8%E8%8D%90%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/</id>
+    <published>2017-12-31T06:42:18.000Z</published>
+    <updated>2020-08-11T01:13:15.973Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol><li>从目标公众号下随便找一篇公众号文章, 推荐给朋友, 用PC端浏览器打开这篇文章</li><li>文章侧边有一个关注二维码, <strong>右键二维码在新标签中打开</strong></li><li>从地址栏的链接中找到__biz参数的值</li><li>复制这个参数值, 替换到下面这条链接的__biz参数值, 就得到了目标公众的推荐关注链接<ul><li><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzAxODE2MjM1MA==&amp;scene=126#wechat_redirect" target="_blank" rel="noopener">https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzAxODE2MjM1MA==&amp;scene=126#wechat_redirect</a></li></ul></li><li>搞定收工~</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;从目标公众号下随便找一篇公众号文章, 推荐给朋友, 用PC端浏览器打开这篇文章&lt;/li&gt;
+&lt;li&gt;文章侧边有一个
+      
+    
+    </summary>
+    
+    
+      <category term="微信公众号" scheme="http://wywppkd.github.io/categories/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/"/>
+    
+    
+      <category term="微信公众号" scheme="http://wywppkd.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/"/>
+    
+      <category term="关注链接" scheme="http://wywppkd.github.io/tags/%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Axios之Content-Type</title>
+    <link href="http://wywppkd.github.io/2017/11/07/Axios%E4%B9%8BContent-Type/"/>
+    <id>http://wywppkd.github.io/2017/11/07/Axios%E4%B9%8BContent-Type/</id>
+    <published>2017-11-07T13:20:48.000Z</published>
+    <updated>2020-08-11T01:13:15.965Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Axios之Content-Type"><a href="#Axios之Content-Type" class="headerlink" title="Axios之Content-Type"></a>Axios之Content-Type</h1><ul><li>Content-Type属性不需要手动设置: Axios会根据post请求的data数据类型, 自动设置Content-Type</li></ul><h2 id="Axios会自动设置Content-Type"><a href="#Axios会自动设置Content-Type" class="headerlink" title="Axios会自动设置Content-Type"></a>Axios会自动设置Content-Type</h2><h3 id="1-默认值application-json"><a href="#1-默认值application-json" class="headerlink" title="1. 默认值application/json"></a>1. 默认值<code>application/json</code></h3><ul><li>场景: 请求数据data为对象时, 不需要任何处理</li></ul><pre><code class="js">axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:{        name:&quot;tom&quot;    }}).then(res =&gt; {    console.log(res)})</code></pre><h3 id="2-application-x-www-form-urlencoded"><a href="#2-application-x-www-form-urlencoded" class="headerlink" title="2. application/x-www-form-urlencoded"></a>2. <code>application/x-www-form-urlencoded</code></h3><ul><li>场景: 当请求数据data为字符串或URLSearchParams对象时</li></ul><ol><li>URLSearchParams API</li></ol><pre><code class="js">var params = new URLSearchParams();params.append(&#39;param1&#39;, &#39;value1&#39;);params.append(&#39;param2&#39;, &#39;value2&#39;);axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:params}).then(res =&gt;{    console.log(res)})</code></pre><ol start="2"><li>使用qs库将对象转成查询字符串</li></ol><pre><code class="js">import Qs from &#39;qs&#39;;let data = Qs.stringify({name:&quot;Tom&quot;})axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:data}).then(res =&gt; {    console.log(res)})</code></pre><h3 id="3-multipart-form-data"><a href="#3-multipart-form-data" class="headerlink" title="3. multipart/form-data"></a>3. <code>multipart/form-data</code></h3><ul><li>场景: 上传文件时, 请求数据data转为FormData类型时</li></ul><pre><code class="js">let params = new FormData();params.append(&quot;name&quot;, &quot;Tom&quot;);dparamsata.append(&quot;age&quot;, &quot;18&quot;);axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:params}).then(res =&gt;{    console.log(res)})</code></pre><hr><h2 id="如果一定要使用application-x-www-form-urlencoded"><a href="#如果一定要使用application-x-www-form-urlencoded" class="headerlink" title="如果一定要使用application/x-www-form-urlencoded"></a>如果一定要使用<code>application/x-www-form-urlencoded</code></h2><ul><li>处理: 统一将data数据格式化为查询字符串</li><li>缺点: 所有post请求都会使用<code>application/x-www-form-urlencoded</code>, 如果需要Content-Type其他类型时就需要单独处理请求了, 比如上传文件时需要使用<code>multipart/form-data;</code></li></ul><pre><code class="js">let instance = axios.create({  // 发送前, 修改请求数据, Content-Type会根据修改后的数据自动设置  transformRequest: [    function(data, headers) {      return Qs.stringify(data);    }  ]});</code></pre><h2 id="建议"><a href="#建议" class="headerlink" title="建议:"></a>建议:</h2><ul><li>与后端沟通一致, 统一使用<code>application/json</code>类型</li><li>不影响使用<code>multipart/form-data</code>类型上传文件</li><li>并且json数据类型对于多层嵌套的数据更友好</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Axios之Content-Type&quot;&gt;&lt;a href=&quot;#Axios之Content-Type&quot; class=&quot;headerlink&quot; title=&quot;Axios之Content-Type&quot;&gt;&lt;/a&gt;Axios之Content-Type&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="axios" scheme="http://wywppkd.github.io/categories/axios/"/>
+    
+    
+      <category term="Content-Type" scheme="http://wywppkd.github.io/tags/Content-Type/"/>
+    
+      <category term="axios" scheme="http://wywppkd.github.io/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Content-Type介绍</title>
+    <link href="http://wywppkd.github.io/2017/10/18/Content-Type%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://wywppkd.github.io/2017/10/18/Content-Type%E4%BB%8B%E7%BB%8D/</id>
+    <published>2017-10-18T12:22:45.000Z</published>
+    <updated>2020-08-11T01:13:15.966Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Content-Type介绍"><a href="#Content-Type介绍" class="headerlink" title="Content-Type介绍"></a>Content-Type介绍</h1><h2 id="请求头中的Content-Type"><a href="#请求头中的Content-Type" class="headerlink" title="请求头中的Content-Type"></a>请求头中的Content-Type</h2><ul><li>作用: 告诉服务器实际发送的数据类型</li><li>常见类型:<ol><li>application/x-www-form-urlencoded;</li><li>multipart/form-data; 常用于上传文件, 支持二进制格式</li><li>application/json;</li><li>text/plain; 很少用</li></ol></li></ul><h2 id="响应头中的Content-Type"><a href="#响应头中的Content-Type" class="headerlink" title="响应头中的Content-Type"></a>响应头中的Content-Type</h2><ul><li>告诉客户端实际返回的内容的内容类型</li><li>常见类型:<ol><li>application/json;</li><li>text/html;</li><li>text/plain;</li><li>image/png;</li><li>application/octet-stream; 文件下载</li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Content-Type介绍&quot;&gt;&lt;a href=&quot;#Content-Type介绍&quot; class=&quot;headerlink&quot; title=&quot;Content-Type介绍&quot;&gt;&lt;/a&gt;Content-Type介绍&lt;/h1&gt;&lt;h2 id=&quot;请求头中的Content-Type
+      
+    
+    </summary>
+    
+    
+      <category term="HTTP" scheme="http://wywppkd.github.io/categories/HTTP/"/>
+    
+    
+      <category term="HTTP" scheme="http://wywppkd.github.io/tags/HTTP/"/>
+    
+      <category term="Content-Type" scheme="http://wywppkd.github.io/tags/Content-Type/"/>
+    
+  </entry>
+  
+</feed>

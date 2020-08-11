@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>常用时间方法汇总 | 布兰的网络日志</title>
+  <meta name="description" content="先了解Date对象一些原生方法var oDate &#x3D; new Date()   &#x2F;&#x2F;获取Date对象的某值   console.log(oDate.getFullYear());       &#x2F;&#x2F;年(以四位数字返回年份)   console.log(oDate.getMonth()+1);        &#x2F;&#x2F;月(0 ~ 11)   console.log(oDate.getDate());">
+<meta name="keywords" content="Date,时间格式化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用时间方法汇总">
+<meta property="og:url" content="http:&#x2F;&#x2F;wywppkd.github.io&#x2F;2016&#x2F;03&#x2F;04&#x2F;%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB&#x2F;index.html">
+<meta property="og:site_name" content="Bran&#39;s Blog">
+<meta property="og:description" content="先了解Date对象一些原生方法var oDate &#x3D; new Date()   &#x2F;&#x2F;获取Date对象的某值   console.log(oDate.getFullYear());       &#x2F;&#x2F;年(以四位数字返回年份)   console.log(oDate.getMonth()+1);        &#x2F;&#x2F;月(0 ~ 11)   console.log(oDate.getDate());">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-11T01:13:15.975Z">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wywppkd.github.io/2016/03/04/%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Bran&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Bran</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Explorer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wywppkd" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Express/">Express</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/URL/">URL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/axios/">axios</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js%E6%A8%A1%E5%9D%97%E5%8C%96/">js模块化</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9A%E4%BD%8D/">定位</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">微信公众号</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/" rel="tag">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMD/" rel="tag">CMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/" rel="tag">CommonJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Type/" rel="tag">Content-Type</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/" rel="tag">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6-Module/" rel="tag">ES6 Module</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/" rel="tag">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prettier/" rel="tag">Prettier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/" rel="tag">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URLSearchParams/" rel="tag">URLSearchParams</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/export/" rel="tag">export</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express-session/" rel="tag">express-session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/import/" rel="tag">import</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">js模块化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module-exports/" rel="tag">module.exports</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/morgan%E6%97%A5%E5%BF%97/" rel="tag">morgan日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" rel="tag">npm常用操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm%E6%BA%90/" rel="tag">npm源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nrm/" rel="tag">nrm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require/" rel="tag">require</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/" rel="tag">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/" rel="tag">关注链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9D%90%E6%A0%87%E7%B3%BB/" rel="tag">坐标系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%BD%8D/" rel="tag">定位</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91npm%E5%8C%85/" rel="tag">开发npm包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="tag">开发环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="tag">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" rel="tag">支付宝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="tag">时间格式化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E9%A2%9D%E8%BE%93%E5%85%A5/" rel="tag">金额输入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%BE%B7/" rel="tag">高德</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AMD/" style="font-size: 13.33px;">AMD</a> <a href="/tags/CMD/" style="font-size: 13px;">CMD</a> <a href="/tags/CommonJS/" style="font-size: 13.33px;">CommonJS</a> <a href="/tags/Content-Type/" style="font-size: 13.33px;">Content-Type</a> <a href="/tags/Date/" style="font-size: 13px;">Date</a> <a href="/tags/ES6/" style="font-size: 13px;">ES6</a> <a href="/tags/ES6-Module/" style="font-size: 13px;">ES6 Module</a> <a href="/tags/ESLint/" style="font-size: 13px;">ESLint</a> <a href="/tags/H5/" style="font-size: 13px;">H5</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Node/" style="font-size: 14px;">Node</a> <a href="/tags/Prettier/" style="font-size: 13px;">Prettier</a> <a href="/tags/React/" style="font-size: 13.33px;">React</a> <a href="/tags/TypeScript/" style="font-size: 13.33px;">TypeScript</a> <a href="/tags/URL/" style="font-size: 13px;">URL</a> <a href="/tags/URLSearchParams/" style="font-size: 13px;">URLSearchParams</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/export/" style="font-size: 13px;">export</a> <a href="/tags/express-session/" style="font-size: 13px;">express-session</a> <a href="/tags/import/" style="font-size: 13px;">import</a> <a href="/tags/js%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 14px;">js模块化</a> <a href="/tags/module-exports/" style="font-size: 13px;">module.exports</a> <a href="/tags/morgan%E6%97%A5%E5%BF%97/" style="font-size: 13px;">morgan日志</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/npm/" style="font-size: 13.67px;">npm</a> <a href="/tags/npm%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" style="font-size: 13px;">npm常用操作</a> <a href="/tags/npm%E6%BA%90/" style="font-size: 13px;">npm源</a> <a href="/tags/nrm/" style="font-size: 13px;">nrm</a> <a href="/tags/require/" style="font-size: 13px;">require</a> <a href="/tags/require-js/" style="font-size: 13px;">require.js</a> <a href="/tags/%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/" style="font-size: 13px;">关注链接</a> <a href="/tags/%E5%9D%90%E6%A0%87%E7%B3%BB/" style="font-size: 13px;">坐标系</a> <a href="/tags/%E5%AE%9A%E4%BD%8D/" style="font-size: 13.67px;">定位</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13.33px;">小程序</a> <a href="/tags/%E5%BC%80%E5%8F%91npm%E5%8C%85/" style="font-size: 13px;">开发npm包</a> <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 13px;">开发环境</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 13px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 13px;">微信公众号</a> <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" style="font-size: 13px;">支付宝</a> <a href="/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" style="font-size: 13px;">时间格式化</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" style="font-size: 13px;">虚拟主机</a> <a href="/tags/%E9%87%91%E9%A2%9D%E8%BE%93%E5%85%A5/" style="font-size: 13px;">金额输入</a> <a href="/tags/%E9%AB%98%E5%BE%B7/" style="font-size: 13px;">高德</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/" class="title">React-Typescript配置ESLint-Prettier</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-11T01:16:45.000Z" itemprop="datePublished">2020-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/TypeScript/">TypeScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/17/%E7%94%A8TS%E5%86%99React/" class="title">用TS写React</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-17T01:27:07.000Z" itemprop="datePublished">2020-07-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Express/">Express</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/10/08/express-session%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/" class="title">express-session使用介绍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-10-08T11:53:20.000Z" itemprop="datePublished">2019-10-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Express/">Express</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/09/08/morgan%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="title">morgan日志中间件</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-09-08T12:34:12.000Z" itemprop="datePublished">2019-09-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/npm/">npm</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/09/06/%E5%88%87%E6%8D%A2npm%E6%BA%90%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="title">切换npm源的几种方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-09-06T07:42:33.000Z" itemprop="datePublished">2019-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-常用时间方法汇总" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用时间方法汇总
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2016/03/04/%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB/" class="article-date">
+	  <time datetime="2016-03-04T09:47:23.000Z" itemprop="datePublished">2016-03-04</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Date/" rel="tag">Date</a>, <a class="article-tag-link" href="/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="tag">时间格式化</a>
+  </span>
+
+
+        
+
+        <!-- 关闭评论 -->
+        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2016/03/04/%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB/#comments" class="article-comment-link">评论</a></span> -->
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="先了解Date对象一些原生方法"><a href="#先了解Date对象一些原生方法" class="headerlink" title="先了解Date对象一些原生方法"></a>先了解Date对象一些原生方法</h3><pre><code class="js">var oDate = new Date()
+  //获取Date对象的某值
+  console.log(oDate.getFullYear());       //年(以四位数字返回年份)
+  console.log(oDate.getMonth()+1);        //月(0 ~ 11)
+  console.log(oDate.getDate());           //日(1 ~ 31)
+  console.log(oDate.getHours());          //时(0 ~ 23)
+  console.log(oDate.getMinutes());        //分(0 ~ 59)
+  console.log(oDate.getSeconds());        //秒(0 ~ 59)
+  console.log(oDate.getMilliseconds());   //毫秒值(0 ~ 999)
+  console.log(oDate.getDay());            //周几(0 ~ 6)
+  console.log(oDate.toDateString());            //将Date对象的日期部分转成字符串(通常用来对比时间是否相同)
+  console.log(oDate.toTimeString());            //将Date对象的时间部分转成字符串
+
+  //设置Date对象的某值
+  oDate.setDate()         // 月的某一天 (1 ~ 31)。
+  oDate.setMonth()        // 月份 (0 ~ 11)。
+  oDate.setFullYear()     // 年（四位数字）。
+  oDate.setHours()        // 时 (0 ~ 23)。
+  oDate.setMinutes()      // 分 (0 ~ 59)。
+  oDate.setSeconds()      // 秒 (0 ~ 59)。
+  oDate.setMilliseconds() // 毫秒值 (0 ~ 999)。</code></pre>
+<ul>
+<li>Date对象与时间戳相互转换(3种方法)<pre><code class="js">// Date获取时间戳
+  Date.parse(new Date()); //只能精确到秒
+  oDate.getTime();
+  oDate.valueOf();
+// 时间戳转Date对象
+  oDate.setTime() </code></pre>
+</li>
+</ul>
+<h3 id="时间格式化常用方法"><a href="#时间格式化常用方法" class="headerlink" title="时间格式化常用方法"></a>时间格式化常用方法</h3><ul>
+<li>时间戳转固定时间格式</li>
+</ul>
+<pre><code class="js">/**
+ * 最常用
+ * 时间戳 =&gt; 2017-12-05 15:55:32
+ */
+  function formatTime(s){
+    var fix = function(num){
+      return (&#39;&#39; + num).length &lt; 2 ? ((new Array(3)).join(&#39;0&#39;) + num).slice(-2) : &#39;&#39; + num;
+    }
+    var time = new Date(s);
+    return time.getFullYear()+&quot;-&quot;+fix(time.getMonth()+1)+&quot;-&quot;+fix(time.getDate())+&quot; &quot;+fix(time.getHours())+&quot;:&quot;+fix(time.getMinutes())+&quot;:&quot;+fix(time.getSeconds());
+  }
+
+/**
+ * 今天星期[&#39;日&#39;,&#39;一&#39;,&#39;二&#39;,&#39;三&#39;,&#39;四&#39;,&#39;五&#39;,&#39;六&#39;]
+ */
+  function severalWeek(){
+    var arr = [&#39;日&#39;,&#39;一&#39;,&#39;二&#39;,&#39;三&#39;,&#39;四&#39;,&#39;五&#39;,&#39;六&#39;];
+    var severalWeek = new Date();
+    return arr[severalWeek.getDay()];
+  }
+
+/**
+ * 时间戳 =&gt; 2017.12.26 星期二 09:44
+ */
+  function formatTime(s){
+    var fix = function(num){
+      return (&#39;&#39; + num).length &lt; 2 ? ((new Array(3)).join(&#39;0&#39;) + num).slice(-2) : &#39;&#39; + num;
+    }
+    var time = new Date(s);
+
+    var arr = [&#39;日&#39;,&#39;一&#39;,&#39;二&#39;,&#39;三&#39;,&#39;四&#39;,&#39;五&#39;,&#39;六&#39;];
+    day = arr[time.getDay()];
+
+    return time.getFullYear()+&quot;.&quot;+fix(time.getMonth()+1)+&quot;.&quot;+fix(time.getDate())+&quot; 星期&quot;+day+&quot; &quot;+fix(time.getHours())+&quot;:&quot;+fix(time.getMinutes());
+  }
+
+/**
+ * 时间戳 =&gt; [&#39;今天&#39;,&#39;昨天&#39;,&#39;周x&#39;]
+ */
+  function orderTime(str){
+    var d = new Date(str);
+    var todaysDate = new Date();
+    var yestdayDate = new Date(new Date()-24*3600*1000);
+    if(d.toDateString() == todaysDate.toDateString()){
+      return &quot;今天&quot;
+    }else if(d.toDateString() == yestdayDate.toDateString()){
+      return &quot;昨天&quot;
+    }else{
+      var arr = [&#39;周日&#39;,&#39;周一&#39;,&#39;周二&#39;,&#39;周三&#39;,&#39;周四&#39;,&#39;周五&#39;,&#39;周六&#39;];
+      var week = new Date(str);
+      return arr[week.getDay()];
+    }
+  }
+
+/**
+ * 时间戳 =&gt; [&#39;刚刚&#39;,&#39;x分钟前&#39;,&#39;x小时前&#39;,&#39;x天前&#39;,&#39;x个月前&#39;,&#39;x年前&#39;]
+ */
+  function formatPassTime(startTime) {
+    var currentTime = Date.parse(new Date()),
+      time = currentTime - startTime,
+      day = parseInt(time / (1000 * 60 * 60 * 24))
+      hour = parseInt(time / (1000 * 60 * 60))
+      min = parseInt(time / (1000 * 60))
+      month = parseInt(day / 30)
+      year = parseInt(month / 12)
+    if (year) return year + &quot;年前&quot;
+    if (month) return month + &quot;个月前&quot;
+    if (day) return day + &quot;天前&quot;
+    if (hour) return hour + &quot;小时前&quot;
+    if (min) return min + &quot;分钟前&quot;
+    else return &#39;刚刚&#39;
+  }
+
+/**
+ * 时间戳 =&gt; [&#39;今天&#39;,&#39;昨天&#39;,&#39;mm:ss&#39;,&#39;MM-DD&#39;]
+ */
+  function orderTime(str){
+    var fix = function(num){
+      return (&#39;&#39; + num).length &lt; 2 ? ((new Array(3)).join(&#39;0&#39;) + num).slice(-2) : &#39;&#39; + num;
+    }
+    var d = new Date(str);
+    var todaysDate = new Date();
+    var yestdayDate = new Date(new Date()-24*3600*1000);
+    if(d.toDateString() == todaysDate.toDateString()){
+      return fix(d.getHours())+&quot;:&quot;+fix(d.getMinutes())
+    }else if(d.toDateString() == yestdayDate.toDateString()){
+      return fix(d.getHours())+&quot;:&quot;+fix(d.getMinutes())
+    }else{
+      return fix(d.getMonth()+1)+&quot;-&quot;+fix(d.getDate())
+    }
+  }</code></pre>
+<ul>
+<li><p>距离截止日期还有x天 x小时 x分钟 x秒</p>
+<pre><code class="js">/**
+* 距离截止日期还有x天 hh:mm:ss (自动更新)
+* 截止日期endTime(时间戳) =&gt; 倒计时剩余:n天 hh:mm:ss
+*/
+function showRemainTime(endTime) {
+  var fix = function(num){
+    return (&#39;&#39; + num).length &lt; 2 ? ((new Array(3)).join(&#39;0&#39;) + num).slice(-2) : &#39;&#39; + num;
+  }
+  var nowtime = new Date();
+  var endtime = new Date(endTime);//截止时间
+  var timeLag = Math.floor((endtime.getTime() - nowtime.getTime()) / 1000);
+  var d = Math.floor(timeLag / (24 * 60 * 60));
+  var h = Math.floor(timeLag / (60 * 60) % 24);
+  var m = Math.floor(timeLag / 60 % 60);
+  var s = Math.floor(timeLag % 60);
+  h = fix(h);
+  m = fix(m);
+  s = fix(s);
+  console.log(&quot;倒计时剩余&quot; + d + &quot;天 &quot; + h + &quot;:&quot; + m + &quot;:&quot; + s);
+  if(timeLag&lt;=0){
+    console.log(&quot;活动已结束&quot;);
+    return;
+  }
+  setTimeout(showRemainTime,1000,endTime);//1秒后获取当前时间,计算并更新剩余多少时间
+}</code></pre>
+</li>
+<li><p>判断是不是某一天</p>
+<pre><code>/**
+* n天(前|后)的时间
+* 时间戳 =&gt; n天(前|后)的时间戳
+*/
+var newTime = new Date()-24*3600*1000;   // 昨天
+var newTime = new Date()-24*3600*1000*2; // 前天
+var newTime = new Date()-24*3600*1000*3; // 3天前
+
+var newTime = new Date().getTime()+24*3600*1000;   // 明天
+var newTime = new Date().getTime()+24*3600*1000*2; // 后天
+var newTime = new Date().getTime()+24*3600*1000*3; // 3天后
+</code></pre></li>
+</ul>
+<p>/**</p>
+<ul>
+<li>是不是今天</li>
+<li>时间戳 =&gt; (是|不是)</li>
+<li>/<br>function isToday(str){<br>  var d = new Date(str);<br>  var todaysDate = new Date();<br>  if(d.toDateString() == todaysDate.toDateString()){    //将需要检测的时间和当前时间的时,分,秒,毫秒分别设置为0,然后对比年月日是否相同<pre><code>return true;                                            </code></pre>  } else {<pre><code>return false;                                           </code></pre>  }<br>}</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>是不是昨天</li>
+<li>‘2016-06-06 06:06:06’ =&gt; (是|不是)</li>
+<li>/<br>function isYestday(str){<br>  var d = new Date(str);<br>  var yestdayDate = new Date(new Date()-24<em>3600</em>1000);<br>  if(d.toDateString() == yestdayDate.toDateString()){<pre><code>return true;                                            </code></pre>  } else {<pre><code>return false;                                           </code></pre>  }<br>}<pre><code></code></pre></li>
+</ul>
+<ul>
+<li>时间排序<pre><code class="js">/**
+* 时间排序(数组)
+* in: [&#39;2018-03-05&#39;, &#39;2013-06-12&#39;,&#39;2019-03-12&#39;,&#39;2018-03-05&#39;,&#39;2014-02-22&#39;]
+* out:[&quot;2013-06-12&quot;, &quot;2014-02-22&quot;, &quot;2018-03-05&quot;, &quot;2018-03-05&quot;, &quot;2019-03-12&quot;]
+*/
+var arr = [&#39;2018-03-05&#39;, &#39;2013-06-12&#39;,&#39;2019-03-12&#39;,&#39;2018-03-05&#39;,&#39;2014-02-22&#39;];
+arr.sort(function(a,b){return new Date(a)-new Date(b)});
+console.log(arr);//[&quot;2013-06-12&quot;, &quot;2014-02-22&quot;, &quot;2018-03-05&quot;, &quot;2018-03-05&quot;, &quot;2019-03-12&quot;]</code></pre>
+<blockquote>
+<p>iOS端不支持”2018-08-08 11:11:11”<br>需要转换为”2018/08/08 11:11:11”<br><code>var d = new Date(str.replace(/-/g,&quot;/&quot;));</code></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wywppkd.github.io/2016/03/04/%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB/" title="常用时间方法汇总" target="_blank" rel="external">http://wywppkd.github.io/2016/03/04/%E5%B8%B8%E7%94%A8%E6%97%B6%E9%97%B4%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="/" target="_blank"><span class="text-dark">Bran</span><small class="ml-1x">Web Developer &amp; Explorer</small></a></h3>
+        <div>Coding Strong!</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2017/10/14/%E8%8E%B7%E5%8F%96URL%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="获取URL参数的几种方式"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wywppkd" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 Bran
+        
+        <div class="publishby">
+        	<!-- Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
