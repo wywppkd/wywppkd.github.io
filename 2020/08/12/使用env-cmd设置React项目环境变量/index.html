@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>React-Typescript配置ESLint-Prettier | 布兰的网络日志</title>
-  <meta name="description" content="创建项目$ npx create-react-app app-react-ts --typescript 安装 ESLint 解析 TypeScript 的依赖$ npm i eslint -D # eslint包 $ npm i @typescript-eslint&#x2F;parser -D # 将 TypeScript 转换为 ESTree，使 eslint 可以识别 ts $ npm i @typ">
-<meta name="keywords" content="React,TypeScript,ESLint,Prettier">
+  <title>使用env-cmd设置React项目环境变量 | 布兰的网络日志</title>
+  <meta name="description" content="借助env-cmd设置环境变量, 避免每次手动修改代码  $ npm install env-cmd -D # 打包时将自定义变量注入到环境变量process.env中 创建.env文件 注意: 变量名一定要用REACT_APP_开头, 其他变量名(除NODE_ENV)会被忽略 注意: 修改变量后必须重新打包  &#x2F;&#x2F; .env.dev REACT_APP_API_URL&#x3D;http:&#x2F;&#x2F;api-d">
+<meta name="keywords" content="React项目环境变量,env-cmd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React-Typescript配置ESLint-Prettier">
-<meta property="og:url" content="http:&#x2F;&#x2F;wywppkd.github.io&#x2F;2020&#x2F;08&#x2F;11&#x2F;React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier&#x2F;index.html">
+<meta property="og:title" content="使用env-cmd设置React项目环境变量">
+<meta property="og:url" content="http:&#x2F;&#x2F;wywppkd.github.io&#x2F;2020&#x2F;08&#x2F;12&#x2F;%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&#x2F;index.html">
 <meta property="og:site_name" content="Bran&#39;s Blog">
-<meta property="og:description" content="创建项目$ npx create-react-app app-react-ts --typescript 安装 ESLint 解析 TypeScript 的依赖$ npm i eslint -D # eslint包 $ npm i @typescript-eslint&#x2F;parser -D # 将 TypeScript 转换为 ESTree，使 eslint 可以识别 ts $ npm i @typ">
+<meta property="og:description" content="借助env-cmd设置环境变量, 避免每次手动修改代码  $ npm install env-cmd -D # 打包时将自定义变量注入到环境变量process.env中 创建.env文件 注意: 变量名一定要用REACT_APP_开头, 其他变量名(除NODE_ENV)会被忽略 注意: 修改变量后必须重新打包  &#x2F;&#x2F; .env.dev REACT_APP_API_URL&#x3D;http:&#x2F;&#x2F;api-d">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-12T08:56:50.539Z">
+<meta property="og:updated_time" content="2020-08-12T08:57:30.233Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://wywppkd.github.io/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/index.html">
+  <link rel="canonical" href="http://wywppkd.github.io/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Bran&#39;s Blog" type="application/atom+xml">
   
@@ -318,14 +318,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-React-Typescript配置ESLint-Prettier" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-使用env-cmd设置React项目环境变量" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      React-Typescript配置ESLint-Prettier
+      使用env-cmd设置React项目环境变量
     </h1>
   
 
@@ -333,8 +333,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/" class="article-date">
-	  <time datetime="2020-08-11T01:16:45.000Z" itemprop="datePublished">2020-08-11</time>
+	<a href="/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" class="article-date">
+	  <time datetime="2020-08-12T08:56:50.000Z" itemprop="datePublished">2020-08-12</time>
 	</a>
 </span>
         
@@ -346,58 +346,43 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/ESLint/" rel="tag">ESLint</a>, <a class="article-tag-link" href="/tags/Prettier/" rel="tag">Prettier</a>, <a class="article-tag-link" href="/tags/React/" rel="tag">React</a>, <a class="article-tag-link" href="/tags/TypeScript/" rel="tag">TypeScript</a>
+	<a class="article-tag-link" href="/tags/React%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="tag">React项目环境变量</a>, <a class="article-tag-link" href="/tags/env-cmd/" rel="tag">env-cmd</a>
   </span>
 
 
         
 
         <!-- 关闭评论 -->
-        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/#comments" class="article-comment-link">评论</a></span> -->
+        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/#comments" class="article-comment-link">评论</a></span> -->
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><pre><code class="bash">$ npx create-react-app app-react-ts --typescript</code></pre>
-<h2 id="安装-ESLint-解析-TypeScript-的依赖"><a href="#安装-ESLint-解析-TypeScript-的依赖" class="headerlink" title="安装 ESLint 解析 TypeScript 的依赖"></a>安装 ESLint 解析 TypeScript 的依赖</h2><pre><code class="bash">$ npm i eslint -D # eslint包
-$ npm i @typescript-eslint/parser -D # 将 TypeScript 转换为 ESTree，使 eslint 可以识别 ts
-$ npm i @typescript-eslint/eslint-plugin -D # 定义好的检测Typescript代码的规范</code></pre>
-<h2 id="安装Prettier依赖"><a href="#安装Prettier依赖" class="headerlink" title="安装Prettier依赖"></a>安装Prettier依赖</h2><pre><code class="bash">$ npm i prettier -D # prettier包
-$ npm i eslint-config-prettier -D # 禁用任何可能干扰现有 prettier 规则的 linting 规则, 一定要把它放在 extends 中最后的位置, 避免再次被打开
-$ npm i eslint-plugin-prettier -D # 将 Prettier 问题作为ESLint规则提示出来</code></pre>
-<h2 id="配置ESLint"><a href="#配置ESLint" class="headerlink" title="配置ESLint"></a>配置ESLint</h2><pre><code class="js">// .eslintrc.js
-module.exports = {
-    // 解析器
-  parser: &quot;@typescript-eslint/parser&quot;,// 使eslint识别ts
-  // 现有规则的一系列预设
-  extends: [
-    &quot;plugin:@typescript-eslint/recommended&quot;,// 启用@typescript-eslint/eslint-plugin建议规则
-    &quot;react-app&quot;,// CRA推荐规则
-    &quot;plugin:prettier/recommended&quot;,// 简化配置: eslint-config-prettier + eslint-plugin-prettier
-  ],
-  // 规则
-  rules: {}
-};</code></pre>
-<h2 id="安装VSCode插件"><a href="#安装VSCode插件" class="headerlink" title="安装VSCode插件"></a>安装VSCode插件</h2><ul>
-<li>ESLint插件</li>
-<li>注意: 不需要安装Prettier插件, 安装了也无妨</li>
+        <blockquote>
+<p>借助<code>env-cmd</code>设置环境变量, 避免每次手动修改代码</p>
+</blockquote>
+<pre><code class="bash">$ npm install env-cmd -D # 打包时将自定义变量注入到环境变量process.env中</code></pre>
+<h2 id="创建-env文件"><a href="#创建-env文件" class="headerlink" title="创建.env文件"></a>创建.env文件</h2><ul>
+<li>注意: 变量名一定要用<code>REACT_APP_</code>开头, 其他变量名(除NODE_ENV)会被忽略</li>
+<li>注意: 修改变量后必须重新打包</li>
 </ul>
-<h2 id="配置settings"><a href="#配置settings" class="headerlink" title="配置settings"></a>配置settings</h2><pre><code class="js">// workspace settings.json
+<pre><code class="js">// .env.dev
+REACT_APP_API_URL=http://api-dev.example.com</code></pre>
+<h2 id="配置scripts命令"><a href="#配置scripts命令" class="headerlink" title="配置scripts命令"></a>配置scripts命令</h2><pre><code class="js">// package.json
 {
-    // 老版只支持js文件校验, 所以需要配置&quot;eslint.validate&quot;
-    // 新版不需要配置&quot;eslint.validate&quot;, 增加ts, vue等支持
-  // &quot;eslint.validate&quot;: [
-  //   &quot;javascript&quot;,
-  //   &quot;javascriptreact&quot;,
-  //   &quot;typescript&quot;,
-  //   &quot;typescriptreact&quot;
-  // ],
-  &quot;editor.formatOnSave&quot;: false,// 保存时, 禁止触发其他扩展格式化代码, 如Prettier
-  &quot;editor.codeActionsOnSave&quot;: {
-    &quot;source.fixAll.eslint&quot;: true// 保存时, 运行ESLint检测并格式化代码
+  &quot;scripts&quot;: {
+      &quot;start&quot;: &quot;react-scripts start&quot;,// development模式
+    &quot;build&quot;: &quot;react-scripts build&quot;,// production模式
+
+      // 使用development模式打包: 将.env.dev内的变量注入到环境变量中
+    &quot;start:dev&quot;: &quot;env-cmd -f .env.dev npm run start&quot;,
+
+      // 使用production模式打包: 将.env.dev内的变量注入到环境变量中
+    &quot;build:dev&quot;: &quot;env-cmd -f .env.dev npm run build&quot;
   }
 }</code></pre>
+<h2 id="读取变量"><a href="#读取变量" class="headerlink" title="读取变量"></a>读取变量</h2><pre><code class="js">process.env.REACT_APP_API_URL // 读取变量</code></pre>
 
       
     </div>
@@ -407,7 +392,7 @@ module.exports = {
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://wywppkd.github.io/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/" title="React-Typescript配置ESLint-Prettier" target="_blank" rel="external">http://wywppkd.github.io/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/</a>
+      <a href="http://wywppkd.github.io/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" title="使用env-cmd设置React项目环境变量" target="_blank" rel="external">http://wywppkd.github.io/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -453,13 +438,9 @@ module.exports = {
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/08/12/%E4%BD%BF%E7%94%A8env-cmd%E8%AE%BE%E7%BD%AEReact%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" title="使用env-cmd设置React项目环境变量"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/07/17/%E7%94%A8TS%E5%86%99React/" title="用TS写React"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/08/11/React-Typescript%E9%85%8D%E7%BD%AEESLint-Prettier/" title="React-Typescript配置ESLint-Prettier"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
