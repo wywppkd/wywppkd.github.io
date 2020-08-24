@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wywppkd.github.io/"/>
-  <updated>2020-08-12T08:57:30.233Z</updated>
+  <updated>2020-08-24T10:04:38.474Z</updated>
   <id>http://wywppkd.github.io/</id>
   
   <author>
@@ -15,6 +15,70 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Taro开发注意事项</title>
+    <link href="http://wywppkd.github.io/2020/08/24/Taro%E5%BC%80%E5%8F%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <id>http://wywppkd.github.io/2020/08/24/Taro%E5%BC%80%E5%8F%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</id>
+    <published>2020-08-24T10:03:42.000Z</published>
+    <updated>2020-08-24T10:04:38.474Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="推荐命名"><a href="#推荐命名" class="headerlink" title="推荐命名"></a>推荐命名</h2><ol><li>普通js/ts文件, 命名: util.js, util_helper.js</li><li>组件文件(大驼峰+jsx后缀): PayResult.jsx, CouponCenter.jsx</li></ol><h2 id="CSS标签选择器-View-Text-不生效"><a href="#CSS标签选择器-View-Text-不生效" class="headerlink" title="CSS标签选择器(View,Text)不生效"></a>CSS标签选择器(View,Text)不生效</h2><ul><li>支付宝小程序不生效, 推荐用类名</li></ul><pre><code class="css">// 支付宝端无效View{  color:#000}// ok.box{  color:#000}</code></pre><h2 id="轮播组件绑定事件无效"><a href="#轮播组件绑定事件无效" class="headerlink" title="轮播组件绑定事件无效"></a>轮播组件绑定事件无效</h2><ul><li>支付宝端: SwiperItem标签绑定onClick事件无效, 必须绑在内部的View或Image标签上</li></ul><pre><code class="jsx">// 绑定事件无效&lt;Swiper&gt;  {swiperList.map((item) =&gt; {    return (      &lt;SwiperItem key={item.cardPackagePartnerId} onClick={tapBanner.bind(            this,            item.cardPackagePartnerId          )}&gt;        &lt;Image src={item.cardPackageImage} /&gt;      &lt;/SwiperItem&gt;    );  })}&lt;/Swiper&gt;// ok&lt;Swiper&gt;  {swiperList.map((item) =&gt; {    return (      &lt;SwiperItem key={item.cardPackagePartnerId} &gt;        &lt;Image          onClick={tapBanner.bind(            this,            item.cardPackagePartnerId          )}          src={item.cardPackageImage}        /&gt;      &lt;/SwiperItem&gt;    );  })}&lt;/Swiper&gt;</code></pre><h2 id="build打包后背景图错乱"><a href="#build打包后背景图错乱" class="headerlink" title="build打包后背景图错乱"></a>build打包后背景图错乱</h2><ul><li>问题: build打包会进行代码压缩合并, 将不同选择器相同的属性<code>background-size: contain;</code>提取合并到一起, 但是合并后的代码确放在<code>background</code>之前, 导致background复合属性覆盖掉了<code>background-size</code>属性</li><li>推荐: 联调测试阶段采用build打包, 避免使用dev打包</li></ul><pre><code class="css">/* 推荐 */.box{  background-image: url(&quot;https://19ego.cn/home/home-default.png&quot;);  background-repeat: no-repeat;  background-size: contain;}/* 不推荐 */.box{  background: url(&quot;https://19ego.cn/home/home-default.png&quot;) no-repeat;  background-size: contain;}</code></pre><h2 id="JSX遍历"><a href="#JSX遍历" class="headerlink" title="JSX遍历"></a>JSX遍历</h2><ul><li>JSX中遍历数组只能使用map</li></ul><h2 id="JSX遍历时-事件传参不支持对象字面量"><a href="#JSX遍历时-事件传参不支持对象字面量" class="headerlink" title="JSX遍历时: 事件传参不支持对象字面量"></a>JSX遍历时: 事件传参不支持对象字面量</h2><blockquote><p>react-hooks组件中没有复现</p></blockquote><pre><code class="jsx">const article = [{id:1, title:&quot;标题1&quot;}, {id:2, title:&quot;标题2&quot;}]// 报错render(){  return (    &lt;View&gt;      article.map((item,index) =&gt; {        // 报错: 不允许传字面量对象        return &lt;View onClick={this.doPay.bind(this, {title:item.title})}&gt;{item.name}&lt;/View&gt;      })      )    &lt;/View&gt;}/// 解决render(){  return (    &lt;View&gt;      article.map((item,index) =&gt; {        // 变量        const obj = {          title:item.title        }        return &lt;View onClick={this.doPay.bind(this, obj)}&gt;{item.name}&lt;/View&gt;      })      )    &lt;/View&gt;}</code></pre><h2 id="taro打包出错"><a href="#taro打包出错" class="headerlink" title="taro打包出错"></a>taro打包出错</h2><ul><li>问题: 命令行工具<code>@tarojs/cli</code>与项目依赖的版本不一致</li><li>解决: 升级<code>@tarojs/cli</code>时注意升级项目依赖, 保持taro工具与项目依赖的版本一致</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;推荐命名&quot;&gt;&lt;a href=&quot;#推荐命名&quot; class=&quot;headerlink&quot; title=&quot;推荐命名&quot;&gt;&lt;/a&gt;推荐命名&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;普通js/ts文件, 命名: util.js, util_helper.js&lt;/li&gt;
+&lt;li&gt;组件文件(大驼峰
+      
+    
+    </summary>
+    
+    
+      <category term="Taro" scheme="http://wywppkd.github.io/categories/Taro/"/>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/tags/React/"/>
+    
+      <category term="Taro" scheme="http://wywppkd.github.io/tags/Taro/"/>
+    
+      <category term="小程序" scheme="http://wywppkd.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker部署React项目</title>
+    <link href="http://wywppkd.github.io/2020/08/24/Docker%E9%83%A8%E7%BD%B2React%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://wywppkd.github.io/2020/08/24/Docker%E9%83%A8%E7%BD%B2React%E9%A1%B9%E7%9B%AE/</id>
+    <published>2020-08-24T10:02:48.000Z</published>
+    <updated>2020-08-24T10:02:53.426Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-创建配置文件"><a href="#1-创建配置文件" class="headerlink" title="1. 创建配置文件"></a>1. 创建配置文件</h2><h3 id="1-1-创建Dockerfile-项目根目录"><a href="#1-1-创建Dockerfile-项目根目录" class="headerlink" title="1.1 创建Dockerfile(项目根目录)"></a>1.1 创建Dockerfile(项目根目录)</h3><pre><code class="bash"># Dockerfile# 第一阶段: 构建node容器镜像FROM node:12.18 # 基础镜像nodeCOPY ./ /app-source # 复制项目文件到镜像内的目标位置/app-sourceWORKDIR /app-source # 指定工作目录RUN npm install &amp;&amp; npm run build:test # 安装依赖 &amp;&amp; 打包# 第二阶段: 构建nginx容器镜像FROM nginx:1.18 # 设置基础镜像nginxRUN mkdir /app # 创建目录COPY --from=0 /app/build /app # 将第一阶段镜像打包后的文件复制到nginx镜像的指定目录  # --from=0 引用第一阶段镜像COPY nginx.conf /etc/nginx/nginx.conf # 复制配置文件到nginx镜像的指定目录</code></pre><h3 id="1-2-创建-dockerignore-项目根目录"><a href="#1-2-创建-dockerignore-项目根目录" class="headerlink" title="1.2 创建.dockerignore(项目根目录)"></a>1.2 创建<code>.dockerignore</code>(项目根目录)</h3><ul><li>防止 node_modules 和其他中间构建产物被复制到镜像中导致构建问题</li></ul><pre><code class="bash">**/node_modules**/build</code></pre><h3 id="1-3-创建nginx-conf-项目根目录"><a href="#1-3-创建nginx-conf-项目根目录" class="headerlink" title="1.3 创建nginx.conf(项目根目录)"></a>1.3 创建<code>nginx.conf</code>(项目根目录)</h3><pre><code class="bash">user  nginx;worker_processes  1;error_log  /var/log/nginx/error.log warn;pid        /var/run/nginx.pid;events {  worker_connections  1024;}http {  include       /etc/nginx/mime.types;  default_type  application/octet-stream;  log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;                    &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;                    &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;  access_log  /var/log/nginx/access.log  main;  sendfile        on;  keepalive_timeout  65;  server {    listen       80; # 端口号    location / {      root   /app; # 站点目录      index  index.html; # 默认首页      try_files $uri $uri/ /index.html; # 兼容history路由    }    error_page   500 502 503 504  /50x.html;    location = /50x.html {      root   /usr/share/nginx/html;    }  }}</code></pre><h2 id="2-构建Docker镜像"><a href="#2-构建Docker镜像" class="headerlink" title="2. 构建Docker镜像"></a>2. 构建Docker镜像</h2><pre><code class="bash"># 进入主机$ git clone ${项目地址} # 克隆工程目录$ cd /app # 进入项目目录$ docker build . -t app-image # 构建Docker镜像</code></pre><h2 id="3-运行Docker镜像"><a href="#3-运行Docker镜像" class="headerlink" title="3. 运行Docker镜像"></a>3. 运行Docker镜像</h2><pre><code class="bash">$ docker run -d -p 8080:80 app-image # 通过镜像启动容器: 映射本机端口号8080-容器内端口90$ curl localhost:8080 # 测试是否部署成功# 通过8080端口访问当前主机</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-创建配置文件&quot;&gt;&lt;a href=&quot;#1-创建配置文件&quot; class=&quot;headerlink&quot; title=&quot;1. 创建配置文件&quot;&gt;&lt;/a&gt;1. 创建配置文件&lt;/h2&gt;&lt;h3 id=&quot;1-1-创建Dockerfile-项目根目录&quot;&gt;&lt;a href=&quot;#1-1-创
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://wywppkd.github.io/tags/React/"/>
+    
+      <category term="Docker" scheme="http://wywppkd.github.io/tags/Docker/"/>
+    
+      <category term="Nginx" scheme="http://wywppkd.github.io/tags/Nginx/"/>
+    
+      <category term="自动化打包部署" scheme="http://wywppkd.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>使用env-cmd设置React项目环境变量</title>
@@ -561,70 +625,11 @@
       <category term="小程序" scheme="http://wywppkd.github.io/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
     
-      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
-    
       <category term="小程序" scheme="http://wywppkd.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
+      <category term="Node" scheme="http://wywppkd.github.io/tags/Node/"/>
+    
       <category term="开发环境" scheme="http://wywppkd.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何找到公众号的推荐关注链接</title>
-    <link href="http://wywppkd.github.io/2017/12/31/%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E6%8E%A8%E8%8D%90%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/"/>
-    <id>http://wywppkd.github.io/2017/12/31/%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E6%8E%A8%E8%8D%90%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/</id>
-    <published>2017-12-31T06:42:18.000Z</published>
-    <updated>2020-08-11T01:13:15.973Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol><li>从目标公众号下随便找一篇公众号文章, 推荐给朋友, 用PC端浏览器打开这篇文章</li><li>文章侧边有一个关注二维码, <strong>右键二维码在新标签中打开</strong></li><li>从地址栏的链接中找到__biz参数的值</li><li>复制这个参数值, 替换到下面这条链接的__biz参数值, 就得到了目标公众的推荐关注链接<ul><li><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzAxODE2MjM1MA==&amp;scene=126#wechat_redirect" target="_blank" rel="noopener">https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzAxODE2MjM1MA==&amp;scene=126#wechat_redirect</a></li></ul></li><li>搞定收工~</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;从目标公众号下随便找一篇公众号文章, 推荐给朋友, 用PC端浏览器打开这篇文章&lt;/li&gt;
-&lt;li&gt;文章侧边有一个
-      
-    
-    </summary>
-    
-    
-      <category term="微信公众号" scheme="http://wywppkd.github.io/categories/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/"/>
-    
-    
-      <category term="微信公众号" scheme="http://wywppkd.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/"/>
-    
-      <category term="关注链接" scheme="http://wywppkd.github.io/tags/%E5%85%B3%E6%B3%A8%E9%93%BE%E6%8E%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Axios之Content-Type</title>
-    <link href="http://wywppkd.github.io/2017/11/07/Axios%E4%B9%8BContent-Type/"/>
-    <id>http://wywppkd.github.io/2017/11/07/Axios%E4%B9%8BContent-Type/</id>
-    <published>2017-11-07T13:20:48.000Z</published>
-    <updated>2020-08-11T01:13:15.965Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Axios之Content-Type"><a href="#Axios之Content-Type" class="headerlink" title="Axios之Content-Type"></a>Axios之Content-Type</h1><ul><li>Content-Type属性不需要手动设置: Axios会根据post请求的data数据类型, 自动设置Content-Type</li></ul><h2 id="Axios会自动设置Content-Type"><a href="#Axios会自动设置Content-Type" class="headerlink" title="Axios会自动设置Content-Type"></a>Axios会自动设置Content-Type</h2><h3 id="1-默认值application-json"><a href="#1-默认值application-json" class="headerlink" title="1. 默认值application/json"></a>1. 默认值<code>application/json</code></h3><ul><li>场景: 请求数据data为对象时, 不需要任何处理</li></ul><pre><code class="js">axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:{        name:&quot;tom&quot;    }}).then(res =&gt; {    console.log(res)})</code></pre><h3 id="2-application-x-www-form-urlencoded"><a href="#2-application-x-www-form-urlencoded" class="headerlink" title="2. application/x-www-form-urlencoded"></a>2. <code>application/x-www-form-urlencoded</code></h3><ul><li>场景: 当请求数据data为字符串或URLSearchParams对象时</li></ul><ol><li>URLSearchParams API</li></ol><pre><code class="js">var params = new URLSearchParams();params.append(&#39;param1&#39;, &#39;value1&#39;);params.append(&#39;param2&#39;, &#39;value2&#39;);axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:params}).then(res =&gt;{    console.log(res)})</code></pre><ol start="2"><li>使用qs库将对象转成查询字符串</li></ol><pre><code class="js">import Qs from &#39;qs&#39;;let data = Qs.stringify({name:&quot;Tom&quot;})axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:data}).then(res =&gt; {    console.log(res)})</code></pre><h3 id="3-multipart-form-data"><a href="#3-multipart-form-data" class="headerlink" title="3. multipart/form-data"></a>3. <code>multipart/form-data</code></h3><ul><li>场景: 上传文件时, 请求数据data转为FormData类型时</li></ul><pre><code class="js">let params = new FormData();params.append(&quot;name&quot;, &quot;Tom&quot;);dparamsata.append(&quot;age&quot;, &quot;18&quot;);axios({    url:&quot;/loadData&quot;,    method:&quot;post&quot;,    data:params}).then(res =&gt;{    console.log(res)})</code></pre><hr><h2 id="如果一定要使用application-x-www-form-urlencoded"><a href="#如果一定要使用application-x-www-form-urlencoded" class="headerlink" title="如果一定要使用application/x-www-form-urlencoded"></a>如果一定要使用<code>application/x-www-form-urlencoded</code></h2><ul><li>处理: 统一将data数据格式化为查询字符串</li><li>缺点: 所有post请求都会使用<code>application/x-www-form-urlencoded</code>, 如果需要Content-Type其他类型时就需要单独处理请求了, 比如上传文件时需要使用<code>multipart/form-data;</code></li></ul><pre><code class="js">let instance = axios.create({  // 发送前, 修改请求数据, Content-Type会根据修改后的数据自动设置  transformRequest: [    function(data, headers) {      return Qs.stringify(data);    }  ]});</code></pre><h2 id="建议"><a href="#建议" class="headerlink" title="建议:"></a>建议:</h2><ul><li>与后端沟通一致, 统一使用<code>application/json</code>类型</li><li>不影响使用<code>multipart/form-data</code>类型上传文件</li><li>并且json数据类型对于多层嵌套的数据更友好</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Axios之Content-Type&quot;&gt;&lt;a href=&quot;#Axios之Content-Type&quot; class=&quot;headerlink&quot; title=&quot;Axios之Content-Type&quot;&gt;&lt;/a&gt;Axios之Content-Type&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="axios" scheme="http://wywppkd.github.io/categories/axios/"/>
-    
-    
-      <category term="Content-Type" scheme="http://wywppkd.github.io/tags/Content-Type/"/>
-    
-      <category term="axios" scheme="http://wywppkd.github.io/tags/axios/"/>
     
   </entry>
   
